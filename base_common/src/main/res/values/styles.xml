@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- 圆形图片 -->
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension"/>
+        <attr name="civ_border_color" format="color"/>
+        <attr name="civ_border_overlay" format="boolean"/>
+        <attr name="civ_fill_color" format="color"/>
+    </declare-styleable>
+
+    <!-- ConfirmDialog -->
+    <style name="BaseDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="DialogStyle" parent="BaseDialogStyle">
+        <item name="android:windowBackground">@color/transparent</item>
+    </style>
+
+    <!-- 底部对话框 -->
+    <style name="Animation.Bottom.Rising" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
+    <style name="Theme.Light.NoTitle.NoShadow.Dialog" parent="Theme.Light.NoTitle.Dialog">
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="Theme.Light.NoTitle.Dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFrame">@null</item>
+    </style>
+
+    <!-- 修改ProgressBar进度条颜色 -->
+    <style name="MyProgressBar" parent="Base.Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateTint">@color/main</item>
+        <item name="android:indeterminateTintMode">src_atop</item>
+    </style>
+
+    <!-- ToolBar -->
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- LoadingLayout -->
+    <declare-styleable name="LoadingLayout">
+        <attr name="isFirstVisible" format="boolean"/>
+    </declare-styleable>
+
+    <!-- 轮播图 -->
+    <declare-styleable name="BannerLayoutStyle">
+        <attr name="selectedIndicatorColor" format="color|reference" />
+        <attr name="unSelectedIndicatorColor" format="color|reference" />
+        <attr name="indicatorShape" format="enum">
+            <enum name="rect" value="0" />
+            <enum name="oval" value="1" />
+        </attr>
+
+        <attr name="selectedIndicatorHeight" format="dimension|reference" />
+        <attr name="selectedIndicatorWidth" format="dimension|reference" />
+
+        <attr name="unSelectedIndicatorHeight" format="dimension|reference" />
+        <attr name="unSelectedIndicatorWidth" format="dimension|reference" />
+
+        <attr name="indicatorPosition" format="enum">
+            <enum name="centerBottom" value="0" />
+            <enum name="rightBottom" value="1" />
+            <enum name="leftBottom" value="2" />
+            <enum name="centerTop" value="3" />
+            <enum name="rightTop" value="4" />
+            <enum name="leftTop" value="5" />
+        </attr>
+
+        <attr name="indicatorSpace" format="dimension|reference" />
+        <attr name="indicatorMargin" format="dimension|reference" />
+        <attr name="autoPlayDuration" format="integer|reference" />
+        <attr name="scrollDuration" format="integer|reference" />
+        <attr name="isAutoPlay" format="boolean|reference" />
+    </declare-styleable>
+
+    <!-- line -->
+    <style name="Line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+
+    <!-- requestBtn -->
+    <declare-styleable name="RequestIcon">
+        <attr name="icon_color" format="reference|color" />
+        <attr name="icon_size" format="dimension" />
+        <attr name="icon_style" format="enum">
+            <enum name="tick_start_circle" value="0" />
+            <enum name="tick_half_circle" value="1" />
+            <enum name="tick_end_circle" value="2" />
+        </attr>
+        <attr name="speed_multiplier" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="RequestButton">
+        <attr name="request_icon_spacing" format="dimension" />
+        <attr name="request_icon_color" format="color" />
+        <attr name="request_icon_size" format="dimension" />
+        <attr name="request_icon_style" format="enum">
+            <enum name="tick_start_circle" value="0" />
+            <enum name="tick_half_circle" value="1" />
+            <enum name="tick_end_circle" value="2" />
+        </attr>
+        <attr name="request_speed_multiplier" format="float" />
+        <attr name="text_default" format="string" />
+        <attr name="text_progress" format="string" />
+        <attr name="text_success" format="string" />
+        <attr name="text_failure" format="string" />
+        <attr name="text_color" format="color" />
+        <attr name="text_size" format="dimension" />
+        <attr name="text_width" format="dimension" />
+    </declare-styleable>
+
+</resources>

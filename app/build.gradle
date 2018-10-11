@@ -1,0 +1,113 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    defaultConfig {
+
+        applicationId rootProject.ext.android["applicationId"]
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    buildTypes {
+
+        packagingOptions {
+            exclude 'META-INF/DEPENDENCIES'
+            exclude 'META-INF/NOTICE'
+            exclude 'META-INF/LICENSE'
+            exclude 'META-INF/LICENSE.txt'
+            exclude 'META-INF/NOTICE.txt'
+            exclude 'META-INF/ASL2.0'
+            exclude 'META-INF/notice.txt'
+        }
+
+        release {
+            // 混淆
+            minifyEnabled false
+            // zipAlign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName = outputFile.name.replace(".apk", "-${defaultConfig.versionName}.apk")
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+        }
+    }
+
+    //
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def file = output.outputFile
+            //生成的文件名
+            output.outputFile = new File(file.parent,
+                    rootProject.ext.android["appName"] + ".apk")
+        }
+    }
+
+    // 多渠道打包
+    // productFlavors {
+    //     kuan {
+    //         manifestPlaceholders = [UMENG_CHANNEL_VALUE: "kuan"]
+    //     }
+    //     xiaomi {
+    //         manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
+    //     }
+    //     qh360 {
+    //         manifestPlaceholders = [UMENG_CHANNEL_VALUE: "qh360"]
+    //     }
+    //     baidu {
+    //         manifestPlaceholders = [UMENG_CHANNEL_VALUE: "baidu"]
+    //     }
+    //     wandoujia {
+    //         manifestPlaceholders = [UMENG_CHANNEL_VALUE: "wandoujia"]
+    //     }
+    //     yingyongbao {
+    //         manifestPlaceholders = [UMENG_CHANNEL_VALUE: "yingyongbao"]
+    //     }
+    // }
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    compile project(':base_common')
+    // MultiDex
+    compile rootProject.ext.dependencies["multidex"]
+    // 只有是library的情况下才添加
+    if (!isModule.toBoolean()) {
+        compile project(':bookkeeping')
+        compile project(':memorandum')
+    }
+}
