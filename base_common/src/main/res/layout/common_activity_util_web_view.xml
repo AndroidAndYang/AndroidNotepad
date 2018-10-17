@@ -6,7 +6,7 @@
 
     <include layout="@layout/common_lib_toolbar" />
 
-    <com.seabig.moduledemo.common.ui.widget.LoadingLayout
+    <com.seabig.common.ui.widget.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,6 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </com.seabig.moduledemo.common.ui.widget.LoadingLayout>
+    </com.seabig.common.ui.widget.LoadingLayout>
 
 </LinearLayout>

@@ -21,13 +21,13 @@
 
         <files-path
             name="images"
-            path="Android/data/com.seabig.moduledemo/files/Pictures/AndroidStudy/" />
+            path="Android/data/com.seabig.common/files/Pictures/AndroidStudy/" />
         <external-path
             name="images"
-            path="Android/data/com.seabig.moduledemo/files/Pictures/AndroidStudy/" />
+            path="Android/data/com.seabig.common/files/Pictures/AndroidStudy/" />
         <external-files-path
             name="images"
-            path="files/Pictures/moduledemo" />
+            path="files/Pictures/common" />
         <external-path
             name="camera_photos"
             path="" />

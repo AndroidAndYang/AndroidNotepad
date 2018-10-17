@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/base_common" />
             <option value="$PROJECT_DIR$/bookkeeping" />
+            <option value="$PROJECT_DIR$/load" />
             <option value="$PROJECT_DIR$/memorandum" />
           </set>
         </option>

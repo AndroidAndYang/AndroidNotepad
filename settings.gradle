@@ -1,1 +1,1 @@
-include ':app', ':bookkeeping', ':memorandum', ':base_common'
+include ':app', ':bookkeeping', ':memorandum', ':base_common', ':load'

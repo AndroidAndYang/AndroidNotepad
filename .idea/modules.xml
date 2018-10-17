@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/base_common/base_common.iml" filepath="$PROJECT_DIR$/base_common/base_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/bookkeeping/bookkeeping.iml" filepath="$PROJECT_DIR$/bookkeeping/bookkeeping.iml" />
+      <module fileurl="file://$PROJECT_DIR$/load/load.iml" filepath="$PROJECT_DIR$/load/load.iml" />
       <module fileurl="file://$PROJECT_DIR$/memorandum/memorandum.iml" filepath="$PROJECT_DIR$/memorandum/memorandum.iml" />
       <module fileurl="file://$PROJECT_DIR$/notepad.iml" filepath="$PROJECT_DIR$/notepad.iml" />
     </modules>
