@@ -19,7 +19,12 @@ public class AppConstant {
     public static final String WEB_VIEW_URL = "URL";
 
     /**
-     * BaseUrl
+     * httpRequest BaseUrl
      */
-    public static final String BASE_URL = "http://weiqi.seabig.cn/api/";
+    public static final String BASE_URL = "http://192.168.1.143:8080/";
+
+    /**
+     * httpRequest 成功状态码
+     */
+    public static final int RESPONSE_STATUS_CODE = 200;
 }

@@ -24,8 +24,8 @@ public class LoginActivity extends ProgressBaseActivity implements LoginContract
     @Override
     protected void onSettingUpView() {
         LoginPresenter loginPresenter = new LoginPresenter(this);
-        loginPresenter.register("18702504472", "5254", "123456");
-
+        // loginPresenter.getList();
+        loginPresenter.registerUser();
     }
 
     @Override

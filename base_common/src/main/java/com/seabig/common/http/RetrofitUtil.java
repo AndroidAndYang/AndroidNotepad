@@ -26,7 +26,7 @@ public class RetrofitUtil {
                             // 使用RxJava作为回调适配器
                             .client(provideOkHttpClient())
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                            .client(new OkHttpClient.Builder().connectTimeout(5, TimeUnit.SECONDS).build())
+                            .client(new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS).build())
                             .build();
                 }
             }

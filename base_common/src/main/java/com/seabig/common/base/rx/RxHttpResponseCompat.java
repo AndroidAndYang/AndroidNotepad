@@ -3,6 +3,7 @@ package com.seabig.common.base.rx;
 import android.util.Log;
 
 import com.seabig.common.bean.BaseBean;
+import com.seabig.common.datamgr.AppConstant;
 import com.seabig.common.exception.ApiException;
 
 import rx.Observable;
@@ -27,7 +28,7 @@ public class RxHttpResponseCompat {
                 return baseBeanObservable.flatMap(new Func1<BaseBean<T>, Observable<T>>() {
                     @Override
                     public Observable<T> call(final BaseBean<T> tBaseBean) {
-                        if (tBaseBean.success()) {
+                        if (tBaseBean.getStatus() == AppConstant.RESPONSE_STATUS_CODE) {
                             return Observable.create(new Observable.OnSubscribe<T>() {
                                 @Override
                                 public void call(Subscriber<? super T> subscriber) {

@@ -11,12 +11,6 @@ import java.io.Serializable;
  */
 public class BaseBean<T> implements Serializable {
 
-    public static final int IS_SUCCESS = 1;
-
-    public boolean success(){
-        return (status == IS_SUCCESS);
-    }
-
     private int status;
 
     private String message;

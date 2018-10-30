@@ -37,7 +37,7 @@ dependencies {
     compile rootProject.ext.dependencies["appcompat-v7"]
 
     // GSon
-    compile "com.google.code.gson:gson:2.7"
+    // compile "com.google.code.gson:gson:2.7"
 
     // 网络加载库
     compile rootProject.ext.dependencies["okGo"]

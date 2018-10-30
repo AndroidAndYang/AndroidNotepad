@@ -43,19 +43,20 @@ public abstract class ProgressBaseFragment extends Fragment implements View.OnCl
         super.onActivityCreated(savedInstanceState);
         // 加载 内容
         setRealContentView();
-        init();
+        onSettingUpView();
     }
 
     private void setRealContentView() {
         /**
          *  为true表示将定义的试图加载到mContentView中
          */
-        contentView = LayoutInflater.from(getActivity()).inflate(initFragmentLayout(), mContentView, true);
+        contentView = LayoutInflater.from(getActivity()).inflate(onSettingUpContentViewResourceID(), mContentView, true);
     }
 
-    protected abstract int initFragmentLayout();
+    protected abstract int onSettingUpContentViewResourceID();
 
-    protected abstract void init();
+    protected abstract void onSettingUpView();
+
 
 
     @Override

@@ -1,7 +1,11 @@
 package com.yjz.load.api;
 
-import com.yjz.load.bean.BaseBean;
+import com.seabig.common.bean.BaseBean;
+import com.yjz.load.bean.UserBean;
 
+import java.util.List;
+
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -21,8 +25,10 @@ public interface ApiService {
 
     // 注册
     // @FormUrlEncoded
-    @POST("index.php?m=user&a=savePost")
-    Observable<BaseBean> getRegisterBean(@Query("mobile") String mobile,
-                                         @Query("msgcode") String msgcode,
-                                         @Query("password") String password);
+    @POST("api/user/register")
+    Observable<BaseBean<Long>> getRegisterBean(@Query("username") String username,
+                                               @Query("phone") String phone);
+    // 获取到全部用户信息
+    @GET("api/user/query_list")
+    Observable<BaseBean<List<UserBean>>> getUserList();
 }
