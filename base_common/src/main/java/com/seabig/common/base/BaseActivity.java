@@ -19,9 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.seabig.common.R;
-import com.seabig.common.ui.widget.LoadingLayout;
 import com.seabig.common.util.ActivityContainer;
-import com.seabig.common.util.LoadingLayoutUtil;
 import com.seabig.common.util.NetworkUtils;
 import com.seabig.common.util.ToastUtils;
 
@@ -41,7 +39,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 没有ToolBar时状态栏颜色
      */
-    private int mStatusColor = R.color.main;
+    public int mStatusColor = R.color.main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,16 +89,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             // 状态栏与标题栏颜色保持一致，并兼容到Android4.4以下
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(ContextCompat.getColor(this, R.color.main));
-            } else {
-                window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                ViewGroup systemContent = (ViewGroup) findViewById(android.R.id.content);
-                // 添加一个空白的view（StatusBar）
-                View statusBarView = new View(this);
-                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight());
-                statusBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.main));
-                systemContent.getChildAt(0).setFitsSystemWindows(false);
-                systemContent.addView(statusBarView, 0, lp);
+                window.setStatusBarColor(ContextCompat.getColor(this, getStatusColor(mStatusColor)));
             }
         }
         onSettingUpView();
@@ -245,45 +234,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         return mStatusColor;
     }
 
-    protected void setViewStatus(LoadingLayout loadingLayout, int status, LoadingLayout.OnReloadListener listener)
-    {
-        switch (status)
-        {
-            case LoadingLayout.NO_NETWORK:
-                LoadingLayoutUtil.setStatusViewOrListener(loadingLayout, LoadingLayout.NO_NETWORK, listener);
-                break;
-
-            case LoadingLayout.LOADING:
-                LoadingLayoutUtil.setStatusViewOrListener(loadingLayout, LoadingLayout.LOADING);
-                break;
-
-            case LoadingLayout.EMPTY:
-                LoadingLayoutUtil.setStatusViewOrListener(loadingLayout, LoadingLayout.EMPTY, listener);
-                break;
-
-            case LoadingLayout.SUCCESS:
-                LoadingLayoutUtil.setStatusViewOrListener(loadingLayout, LoadingLayout.SUCCESS);
-                break;
-
-            case LoadingLayout.ERROR:
-                LoadingLayoutUtil.setStatusViewOrListener(loadingLayout, LoadingLayout.ERROR, listener);
-                break;
-
-            default:
-                break;
-        }
-    }
-
 
     public void initToolBar(Toolbar toolbar, String title) {
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
             if (!TextUtils.isEmpty(title)) {
                 toolbar.setTitle(title);
             }
-
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

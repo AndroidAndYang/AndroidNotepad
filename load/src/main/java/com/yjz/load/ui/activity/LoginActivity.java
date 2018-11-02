@@ -1,4 +1,4 @@
-package com.yjz.load.ui;
+package com.yjz.load.ui.activity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.seabig.common.base.ProgressBaseActivity;

@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">load</string>
+
+    <!-- ########### register start ########### -->
+    <string name="mobile_register">手机号注册</string>
+    <string name="mobile_hint">请输入注册的手机号</string>
+    <string name="pwd">密码</string>
+    <string name="pwd_hint">6–24位数字英文或字符</string>
+    <string name="confirm_register">确认注册</string>
+    <string name="use_hint">同意《产品使用许可协议》</string>
+    <string name="code_hint">请输入图形验证码</string>
+    <string name="register_error">注册信息不能为空</string>
+    <string name="code_err">验证码填写错误</string>
+    <string name="read_err">请阅读用户协议</string>
+    <!-- ########### register end ########### -->
+
 </resources>

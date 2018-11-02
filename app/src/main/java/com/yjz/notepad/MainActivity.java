@@ -1,9 +1,17 @@
 package com.yjz.notepad;
 
+import android.os.Handler;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.seabig.common.base.BaseActivity;
 
+
 public class MainActivity extends BaseActivity {
+
+    @Override
+    protected boolean onSettingFullScreen() {
+        return true;
+    }
 
     @Override
     protected int onSettingUpContentViewResourceID() {
@@ -12,6 +20,12 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onSettingUpView() {
-        ARouter.getInstance().build("/load/activity/login").navigation();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ARouter.getInstance().build("/load/activity/register").navigation();
+                finish();
+            }
+        }, 1000);
     }
 }
