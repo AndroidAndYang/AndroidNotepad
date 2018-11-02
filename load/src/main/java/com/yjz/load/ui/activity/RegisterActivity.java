@@ -10,8 +10,16 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.seabig.common.base.BaseActivity;
+import com.seabig.common.base.rx.RxHttpResponseCompat;
+import com.seabig.common.base.rx.subscribe.ProgressDialogSubscribe;
+import com.seabig.common.http.RetrofitUtil;
+import com.seabig.common.util.LogUtils;
+import com.seabig.common.util.Md5Helper;
 import com.yjz.load.R;
+import com.yjz.load.api.ApiService;
 import com.yjz.load.ui.widget.CaptchaUtil;
+
+import java.util.Date;
 
 /**
  * author： YJZ
@@ -89,9 +97,15 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 return;
             }
 
-            // TODO Http Request
-            showToast("注冊");
-
+            RetrofitUtil.getApi(ApiService.class)
+                    .getRegisterBean(mobileStr, Md5Helper.MD5(pwdStr))
+                    .compose(RxHttpResponseCompat.<Long>compatResult())
+                    .subscribe(new ProgressDialogSubscribe<Long>(this) {
+                        public void onNext(Long baseBean) {
+                            showToast("注册成功");
+                            LogUtils.e("baen = " + baseBean);
+                        }
+                    });
         } else if (id == R.id.captcha_img) {
             getCaptcha();
         } else if (id == R.id.back) {

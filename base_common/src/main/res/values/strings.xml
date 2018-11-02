@@ -19,6 +19,7 @@
     <string name="error_socket_timeout">网络超时</string>
     <string name="error_socket_unreachable">网络不可用</string>
     <string name="error_token">登录失效,请重新登录</string>
+    <string name="error_http_300">用户已存在</string>
     <!-- exception info end -->
 
 </resources>

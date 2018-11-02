@@ -48,6 +48,10 @@ public class ErrorMessageFactory {
                 errorMsg = context.getResources().getString(R.string.error_system);
                 break;
 
+            case BaseException.ERROR_HTTP_300:
+                errorMsg = context.getResources().getString(R.string.error_http_300);
+                break;
+
             case ApiException.ERROR_API_ACCOUNT_FREEZE:
                 errorMsg = context.getResources().getString(R.string.error_account_freeze);
                 break;

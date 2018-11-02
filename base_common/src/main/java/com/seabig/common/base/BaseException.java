@@ -41,6 +41,8 @@ public class BaseException extends Exception {
      **/
     public static final int ERROR_API_LOGIN_TOKEN = 10004;
     // http
+    public static final int ERROR_HTTP_300 = 300;
+
     public static final int ERROR_HTTP_400 = 400;
 
     public static final int ERROR_HTTP_404 = 404;

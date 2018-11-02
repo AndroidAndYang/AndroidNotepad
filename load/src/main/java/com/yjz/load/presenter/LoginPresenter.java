@@ -55,15 +55,15 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> {
         //         .observeOn(AndroidSchedulers.mainThread())
         //         .subscribe(subscribe);
 
-        RetrofitUtil.getApi(ApiService.class)
-                .getRegisterBean("xxx", "13687936131")
-                .compose(RxHttpResponseCompat.<Long>compatResult())
-                .subscribe(new ProgressSubscribe<Long>(mContext, mView) {
-                    @Override
-                    public void onNext(Long baseBean) {
-                        LogUtils.e("baen = " + baseBean);
-                    }
-                });
+         RetrofitUtil.getApi(ApiService.class)
+                 .getRegisterBean("xxx", "13687936131")
+                 .compose(RxHttpResponseCompat.<Long>compatResult())
+                 .subscribe(new ProgressSubscribe<Long>(mContext, mView) {
+                     @Override
+                     public void onNext(Long baseBean) {
+                         LogUtils.e("baen = " + baseBean);
+                     }
+                 });
     }
 
     public void getList() {

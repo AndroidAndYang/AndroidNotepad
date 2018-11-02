@@ -65,7 +65,6 @@ public class ProgressDialogHandler extends Handler {
     public void handleMessage(Message msg) {
         switch (msg.what) {
             case SHOW_PROGRESS_DIALOG:
-
                 showProgressDialog();
                 break;
 
@@ -77,14 +76,12 @@ public class ProgressDialogHandler extends Handler {
 
 
     public void showProgressDialog() {
-        Log.e("TAG", "showProgressDialog");
         if (mProgressDialog != null && !mProgressDialog.isShowing()) {
             mProgressDialog.show();
         }
     }
 
     public void dismissDialog() {
-        Log.e("TAG","dismissDialog");
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
             mProgressDialog = null;

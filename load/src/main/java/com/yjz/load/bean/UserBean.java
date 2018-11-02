@@ -16,8 +16,8 @@ public class UserBean {
      */
 
     private long id;
-    private String username;
     private String phone;
+    private String password;
     private long register_time;
 
     public long getId() {
@@ -28,12 +28,12 @@ public class UserBean {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhone() {
@@ -56,7 +56,7 @@ public class UserBean {
     public String toString() {
         return "UserBean{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", register_time=" + register_time +
                 '}';
