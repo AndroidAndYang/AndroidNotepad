@@ -21,10 +21,17 @@ public class AppConstant {
     /**
      * httpRequest BaseUrl
      */
-    public static final String BASE_URL = "http://192.168.1.143:8080/";
+    public static final String BASE_URL = "http://192.168.1.14:8080/";
 
     /**
      * httpRequest 成功状态码
      */
     public static final int RESPONSE_STATUS_CODE = 200;
+
+
+    /**
+     * App 存储常量
+     */
+    public static final String USER_ID = "USER_ID";
+
 }

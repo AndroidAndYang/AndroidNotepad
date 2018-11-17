@@ -24,18 +24,27 @@ public interface ApiService {
         不然会出现@Field parameters can only be used with form encoding异常。
      */
 
-    // 注册
+    /**
+     * 注册
+     *
+     * @param phone    phone
+     * @param password pwd
+     * @return userId
+     */
     // @FormUrlEncoded
-    @POST("api/user/register")
-    Observable<BaseBean<Long>> getRegisterBean(@Query("phone") String phone,
-                                               @Query("password") String password,
-                                               @Query("register_time") String register_time);
+    @POST ("api/user/register")
+    Observable<BaseBean<Long>> getRegisterBean(@Query ("phone") String phone,
+                                               @Query ("password") String password);
 
-    @POST("api/user/register")
-    Observable<BaseBean<Long>> getRegisterBean(@Query("phone") String phone,
-                                               @Query("password") String password);
+    /**
+     * 登录
+     *
+     * @param phone    phone
+     * @param password pwd
+     * @return userID
+     */
+    @POST ("api/user/login")
+    Observable<BaseBean<Long>> getLoginBean(@Query ("phone") String phone,
+                                            @Query ("password") String password);
 
-    // 获取到全部用户信息
-    @GET("api/user/query_list")
-    Observable<BaseBean<List<UserBean>>> getUserList();
 }

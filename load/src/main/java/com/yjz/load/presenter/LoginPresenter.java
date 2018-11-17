@@ -1,16 +1,12 @@
 package com.yjz.load.presenter;
 
-
 import com.seabig.common.base.BasePresenter;
 import com.seabig.common.base.rx.RxHttpResponseCompat;
-import com.seabig.common.base.rx.subscribe.ProgressSubscribe;
+import com.seabig.common.base.rx.subscribe.ProgressDialogSubscribe;
 import com.seabig.common.http.RetrofitUtil;
-import com.seabig.common.util.LogUtils;
+import com.seabig.common.util.Md5Helper;
 import com.yjz.load.api.ApiService;
-import com.yjz.load.bean.UserBean;
 import com.yjz.load.presenter.contract.LoginContract;
-
-import java.util.List;
 
 /**
  * author： YJZ
@@ -20,12 +16,13 @@ import java.util.List;
 
 public class LoginPresenter extends BasePresenter<LoginContract.View> {
 
-    public LoginPresenter(LoginContract.View view) {
+    public LoginPresenter(LoginContract.View view)
+    {
         super(view);
     }
 
-    public void registerUser() {
-
+    public void registerUser(String userName, String pwd)
+    {
         // 没有封装之前
         // Subscriber<Test> subscribe = new Subscriber<Test>() {
         //     @Override
@@ -55,30 +52,18 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> {
         //         .observeOn(AndroidSchedulers.mainThread())
         //         .subscribe(subscribe);
 
-         RetrofitUtil.getApi(ApiService.class)
-                 .getRegisterBean("xxx", "13687936131")
-                 .compose(RxHttpResponseCompat.<Long>compatResult())
-                 .subscribe(new ProgressSubscribe<Long>(mContext, mView) {
-                     @Override
-                     public void onNext(Long baseBean) {
-                         LogUtils.e("baen = " + baseBean);
-                     }
-                 });
-    }
-
-    public void getList() {
-
         RetrofitUtil.getApi(ApiService.class)
-                .getUserList()
-                .compose(RxHttpResponseCompat.<List<UserBean>>compatResult())
-                .subscribe(new ProgressSubscribe<List<UserBean>>(mContext, mView) {
+                .getLoginBean(userName, Md5Helper.MD5(pwd))
+                .compose(RxHttpResponseCompat.<Long>compatResult())
+                .subscribe(new ProgressDialogSubscribe<Long>(mContext) {
                     @Override
-                    public void onNext(List<UserBean> baseBean) {
-                        for (UserBean userBean : baseBean) {
-                            LogUtils.e("baen = " + userBean.toString());
+                    public void onNext(Long baseBean)
+                    {
+                        if (baseBean > 0)
+                        {
+                            mView.register(baseBean);
                         }
                     }
                 });
-
     }
 }

@@ -23,7 +23,7 @@ public class MainActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                ARouter.getInstance().build("/load/activity/register").navigation();
+                ARouter.getInstance().build("/load/activity/login").navigation();
                 finish();
             }
         }, 1000);

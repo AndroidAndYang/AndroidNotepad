@@ -27,7 +27,7 @@ import java.util.Date;
  * des: 注册
  */
 
-@Route(path = "/load/activity/register")
+@Route (path = "/load/activity/register")
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView mCaptchaImg;
@@ -38,17 +38,20 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private TextView mAgreementTv;
 
     @Override
-    protected int onSettingUpContentViewResourceID() {
+    protected int onSettingUpContentViewResourceID()
+    {
         return R.layout.load_activity_register;
     }
 
     @Override
-    public int getStatusColor(int mStatusColor) {
+    public int getStatusColor(int mStatusColor)
+    {
         return R.color.black_alpha_20;
     }
 
     @Override
-    protected void onSettingUpView() {
+    protected void onSettingUpView()
+    {
         mCaptchaImg = (ImageView) findViewById(R.id.captcha_img);
         mCaptchaImg.setOnClickListener(this);
         mMobileEdt = (EditText) findViewById(R.id.mobile_edt);
@@ -62,24 +65,26 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    protected void onSettingUpData() {
+    protected void onSettingUpData()
+    {
         getCaptcha();
         String str = "同意<font color='#37b97d'>《产品使用许可协议》</font>";
         mAgreementTv.setText(Html.fromHtml(str));
     }
 
     @Override
-    public void onClick(View v) {
-
+    public void onClick(View v)
+    {
         int id = v.getId();
 
-        if (id == R.id.confirm_register) {
-
+        if (id == R.id.confirm_register)
+        {
             String codeStr = mCodeEdt.getText().toString();
             String mobileStr = mMobileEdt.getText().toString();
             String pwdStr = mPwdEdt.getText().toString();
 
-            if (TextUtils.isEmpty(codeStr) || TextUtils.isEmpty(mobileStr) || TextUtils.isEmpty(pwdStr)) {
+            if (TextUtils.isEmpty(codeStr) || TextUtils.isEmpty(mobileStr) || TextUtils.isEmpty(pwdStr))
+            {
                 showToast(getStringByResId(R.string.register_error));
                 return;
             }
@@ -87,12 +92,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             // 图形验证码
             String realCode = CaptchaUtil.build().getCode();
 
-            if (!codeStr.equals(realCode)) {
+            if (!codeStr.equals(realCode))
+            {
                 showToast(getStringByResId(R.string.code_err));
                 return;
             }
 
-            if (!mUseReadBox.isChecked()) {
+            if (!mUseReadBox.isChecked())
+            {
                 showToast(getStringByResId(R.string.read_err));
                 return;
             }
@@ -101,19 +108,25 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     .getRegisterBean(mobileStr, Md5Helper.MD5(pwdStr))
                     .compose(RxHttpResponseCompat.<Long>compatResult())
                     .subscribe(new ProgressDialogSubscribe<Long>(this) {
-                        public void onNext(Long baseBean) {
+                        @Override
+                        public void onNext(Long baseBean)
+                        {
                             showToast("注册成功");
+                            finish();
                             LogUtils.e("baen = " + baseBean);
                         }
                     });
-        } else if (id == R.id.captcha_img) {
+        } else if (id == R.id.captcha_img)
+        {
             getCaptcha();
-        } else if (id == R.id.back) {
+        } else if (id == R.id.back)
+        {
             finish();
         }
     }
 
-    private void getCaptcha() {
+    private void getCaptcha()
+    {
         CaptchaUtil.build()
                 .backColor(0xffffff)
                 .codeLength(4)

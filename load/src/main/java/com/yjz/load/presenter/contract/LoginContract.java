@@ -11,6 +11,11 @@ import com.seabig.common.base.BaseView;
 public interface LoginContract {
 
     interface View extends BaseView {
-        void register();
+        /**
+         * 登录成功
+         *
+         * @param userID 用户id
+         */
+        void register(Long userID);
     }
 }

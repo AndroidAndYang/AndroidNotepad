@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.seabig.common.R;
+import com.seabig.common.util.ToastUtils;
 
 /**
  * <pre>
@@ -18,24 +19,36 @@ import com.seabig.common.R;
  *             继承BaseFragment即可
  * </pre>
  */
-public abstract class ProgressBaseActivity extends AppCompatActivity implements View.OnClickListener, BaseView {
+public abstract class ProgressBaseActivity extends AppCompatActivity implements BaseView {
 
     private FrameLayout mRootView;
     private FrameLayout mContentView;
     private TextView mErrorTv;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         mRootView = (FrameLayout) LayoutInflater.from(this).inflate(R.layout.common_fragment_progress, null, false);
         mRootView.findViewById(R.id.progress_view);
         mContentView = (FrameLayout) mRootView.findViewById(R.id.content_view);
         mRootView.findViewById(R.id.empty_view);
         mErrorTv = (TextView) mRootView.findViewById(R.id.error_tv);
-        mErrorTv.setOnClickListener(this);
+        mErrorTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                onEmptyViewClick();
+            }
+        });
         mContentView.addView(LayoutInflater.from(this).inflate(onSettingUpContentViewResourceID(), mContentView, false));
         setContentView(mRootView);
         onSettingUpView();
+        onSettingUpData();
+    }
+
+    protected void onSettingUpData()
+    {
     }
 
     protected abstract int onSettingUpContentViewResourceID();
@@ -43,53 +56,60 @@ public abstract class ProgressBaseActivity extends AppCompatActivity implements 
     protected abstract void onSettingUpView();
 
     @Override
-    public void showLoadingDialog() {
+    public void showLoadingDialog()
+    {
         showProgressDialog(R.id.progress_view);
     }
 
     @Override
-    public void showErrorDialog(String msg) {
+    public void showErrorDialog(String msg)
+    {
         showProgressDialog(R.id.empty_view);
         mErrorTv.setText(msg);
     }
 
     @Override
-    public void dismissDialog() {
+    public void dismissDialog()
+    {
         // 显示 内容
         showContentView();
     }
 
-    public void showContentView() {
+    public void showContentView()
+    {
         showProgressDialog(R.id.content_view);
     }
 
-    public void showProgressDialog(int resId) {
+    public void showProgressDialog(int resId)
+    {
         // 遍历布局下的所有view
-        for (int i = 0; i < mRootView.getChildCount(); i++) {
+        for (int i = 0; i < mRootView.getChildCount(); i++)
+        {
             // 如果子view 等于当前view则进行显示
-            if (mRootView.getChildAt(i).getId() == resId) {
+            if (mRootView.getChildAt(i).getId() == resId)
+            {
                 mRootView.getChildAt(i).setVisibility(View.VISIBLE);
-            } else {
+            } else
+            {
                 mRootView.getChildAt(i).setVisibility(View.GONE);
             }
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        int i = v.getId();
-        if (i == R.id.error_tv) {// 显示错误 重现请求网络
-            onEmptyViewClick();
-        }
+    protected void showToast(String msg)
+    {
+        ToastUtils.getInstance().showToast(this, msg);
     }
 
     // 子类实现
-    protected void onEmptyViewClick() {
+    protected void onEmptyViewClick()
+    {
 
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy()
+    {
         super.onDestroy();
     }
 }

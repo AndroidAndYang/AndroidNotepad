@@ -79,4 +79,7 @@ dependencies {
     // okHttp
     compile rootProject.ext.dependencies["okHttp"]
     compile rootProject.ext.dependencies["okhttp-interceptor"]
+
+    // AndroidAutoSize
+    compile 'me.jessyan:autosize:1.0.6'
 }

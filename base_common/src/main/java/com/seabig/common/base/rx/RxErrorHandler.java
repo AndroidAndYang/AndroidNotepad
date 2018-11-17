@@ -23,33 +23,48 @@ import retrofit2.adapter.rxjava.HttpException;
  */
 public class RxErrorHandler {
 
-
     private Context mContext;
 
-    public RxErrorHandler(Context context) {
+    public RxErrorHandler(Context context)
+    {
         this.mContext = context;
     }
 
-    public BaseException handleError(Throwable e) {
+    public BaseException handleError(Throwable e)
+    {
         BaseException exception = new BaseException();
-        if (e instanceof ApiException) {
+        if (exception.getCode() == 0 && e instanceof ApiException)
+        {
             exception.setCode(((ApiException) e).getCode());
-        } else if (e instanceof JsonParseException) {
+            exception.setDisplayMsg(((ApiException) e).getDisplayMsg());
+            return exception;
+        }
+
+        if (e instanceof ApiException)
+        {
+            exception.setCode(((ApiException) e).getCode());
+        } else if (e instanceof JsonParseException)
+        {
             exception.setCode(BaseException.JSON_ERROR);
-        } else if (e instanceof HttpException) {
+        } else if (e instanceof HttpException)
+        {
             exception.setCode(((HttpException) e).code());
-        } else if (e instanceof SocketTimeoutException) {
+        } else if (e instanceof SocketTimeoutException)
+        {
             exception.setCode(BaseException.SOCKET_TIMEOUT_ERROR);
-        } else if (e instanceof SocketException) {
+        } else if (e instanceof SocketException)
+        {
             exception.setCode(BaseException.SOCKET_ERROR);
-        } else {
+        } else
+        {
             exception.setCode(BaseException.UNKNOWN_ERROR);
         }
         exception.setDisplayMsg(ErrorMessageFactory.create(mContext, exception.getCode()));
         return exception;
     }
 
-    public void showErrorMessage(BaseException e) {
+    public void showErrorMessage(BaseException e)
+    {
         ToastUtils.getInstance().showToast(mContext, e.getDisplayMsg());
 
     }

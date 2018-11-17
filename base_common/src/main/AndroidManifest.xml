@@ -1,11 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.seabig.common">
+          package="com.seabig.common">
 
     <application
         android:allowBackup="true"
         android:supportsRtl="true">
 
-        <activity android:name=".ui.activity.WebViewActivity" />
+        <!-- AndroidAutoSize -->
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="360"/>
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="640"/>
+
+        <activity android:name=".ui.activity.WebViewActivity"/>
 
         <!-- 7.0权限适配 -->
         <provider
@@ -17,7 +25,7 @@
             <!-- resource:表明创建指定的共享目录在res下的xml文件夹下(file_paths 文件名可以随意指定) -->
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
+                android:resource="@xml/file_paths"/>
 
         </provider>
 
