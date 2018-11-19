@@ -92,6 +92,7 @@ public final class SPUtils {
     {
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
+
         if (defaultObject instanceof String)
         {
             return sp.getString(key, (String) defaultObject);

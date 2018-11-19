@@ -47,7 +47,7 @@
             android:layout_marginTop="@dimen/dp_24"
             android:background="@drawable/register_edt_bg"
             android:hint="@string/login_pwd_hint"
-            android:inputType="number"
+            android:inputType="textPassword"
             android:maxLength="11"
             android:paddingBottom="@dimen/dp_10"
             android:paddingLeft="@dimen/dp_10"

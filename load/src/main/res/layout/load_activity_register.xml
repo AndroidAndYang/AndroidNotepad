@@ -49,6 +49,7 @@
             android:layout_toRightOf="@+id/head_mobile"
             android:background="@null"
             android:hint="@string/mobile_hint"
+            android:inputType="number"
             android:paddingBottom="@dimen/dp_10"
             android:paddingTop="@dimen/dp_10"
             android:textColor="@color/white"

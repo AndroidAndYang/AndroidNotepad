@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import com.seabig.common.R;
 import com.seabig.common.util.ToastUtils;
@@ -105,6 +106,20 @@ public abstract class ProgressBaseActivity extends AppCompatActivity implements 
     protected void onEmptyViewClick()
     {
 
+    }
+
+    public Toolbar initToolbar(int id, int titleId, int titleString) {
+        Toolbar toolbar = (Toolbar) findViewById(id);
+//        toolbar.setTitle("");
+        TextView textView = (TextView) findViewById(titleId);
+        textView.setText(titleString);
+        setSupportActionBar(toolbar);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
+        return toolbar;
     }
 
     @Override

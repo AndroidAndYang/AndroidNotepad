@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/msg"
+        android:icon="@drawable/load_activity_bar_msg"
+        android:orderInCategory="60"
+        android:title="@string/load_activity_bar_msg"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_edit"
+        android:orderInCategory="60"
+        android:title="msg_update"
+        app:actionLayout="@layout/menu_action_item_badge"
+        app:showAsAction="always" />
+
+</menu>

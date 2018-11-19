@@ -9,6 +9,8 @@
 
         <activity android:name=".ui.activity.LoginActivity" />
 
+        <activity android:name=".ui.activity.MainActivity"/>
+
     </application>
 
 </manifest>

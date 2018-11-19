@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_account_books"
+            android:icon="@drawable/ic_launcher"
+            android:title="account_books" />
+        <item
+            android:id="@+id/nav_count"
+            android:icon="@drawable/ic_launcher"
+            android:title="count" />
+    </group>
+
+    <item android:title="other">
+        <menu>
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_launcher"
+                android:title="feedback" />
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_launcher"
+                android:title="setting" />
+        </menu>
+    </item>
+</menu>

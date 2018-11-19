@@ -21,4 +21,10 @@
     <string name="register_now">立即注册</string>
     <!-- ########### login end ########### -->
 
+    <!-- ########### main start ########### -->
+    <string name="navigation_drawer_close">close</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="load_activity_bar_msg">msg</string>
+    <!-- ########### login end ########### -->
+
 </resources>

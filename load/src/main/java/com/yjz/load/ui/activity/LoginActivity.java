@@ -19,21 +19,19 @@ import com.yjz.load.presenter.contract.LoginContract;
  * des: 登录
  */
 
-@Route (path = "/load/activity/login")
+@Route(path = "/load/activity/login")
 public class LoginActivity extends ProgressBaseActivity implements LoginContract.View, View.OnClickListener {
 
     private EditText mMobileEdt;
     private EditText mPwdEdt;
 
     @Override
-    protected int onSettingUpContentViewResourceID()
-    {
+    protected int onSettingUpContentViewResourceID() {
         return R.layout.load_activity_loading;
     }
 
     @Override
-    protected void onSettingUpView()
-    {
+    protected void onSettingUpView() {
         findViewById(R.id.forget_pwd).setOnClickListener(this);
         findViewById(R.id.register_now).setOnClickListener(this);
         findViewById(R.id.login).setOnClickListener(this);
@@ -43,28 +41,23 @@ public class LoginActivity extends ProgressBaseActivity implements LoginContract
     }
 
     @Override
-    public void register(Long userID)
-    {
+    public void register(Long userID) {
         // TODO 跳转activity
         SPUtils.put(this, AppConstant.USER_ID, userID);
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.forget_pwd)
-        {
+        if (i == R.id.forget_pwd) {
             showToast("忘记密码");
-        } else if (i == R.id.register_now)
-        {
+        } else if (i == R.id.register_now) {
             startActivity(new Intent(this, RegisterActivity.class));
-        } else if (i == R.id.login)
-        {
+        } else if (i == R.id.login) {
             String mobileStr = mMobileEdt.getText().toString();
             String pwdStr = mPwdEdt.getText().toString();
-            if (TextUtils.isEmpty(mobileStr) || TextUtils.isEmpty(pwdStr))
-            {
+            if (TextUtils.isEmpty(mobileStr) || TextUtils.isEmpty(pwdStr)) {
                 showToast("信息不能为空");
                 return;
             }

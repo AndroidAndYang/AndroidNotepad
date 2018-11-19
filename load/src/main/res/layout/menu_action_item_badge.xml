@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="48dp"
+    android:layout_height="48dp">
+
+    <ImageView
+        android:id="@+id/menu_badge_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/load_activity_bar_msg" />
+
+    <TextView
+        android:id="@+id/menu_badge"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_alignRight="@+id/menu_badge_icon"
+        android:layout_alignTop="@+id/menu_badge_icon"
+        android:background="@drawable/action_item_badge" />
+
+</RelativeLayout>
