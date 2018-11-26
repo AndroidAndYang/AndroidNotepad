@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_bookkeeping"
+        android:icon="@drawable/load_nav_bookkeeping_normal"
+        android:title="@string/load_nav_bookkeeping" />
+
+    <item
+        android:id="@+id/navigation_memorandum"
+        android:icon="@drawable/load_nav_memorandum_normal"
+        android:title="@string/load_nav_memorandum" />
+
+</menu>

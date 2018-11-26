@@ -27,7 +27,7 @@ public class LauncherActivity extends BaseActivity {
                 Long userId = (Long) SPUtils.get(LauncherActivity.this, AppConstant.USER_ID, 0L);
                 String path;
                 if (userId != null && userId > 0) {
-                    path = "/load/activity/main";
+                    path = "/load/activity/home";
                 } else {
                     path = "/load/activity/login";
                 }

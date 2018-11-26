@@ -10,7 +10,7 @@ import com.yjz.memorandum.R;
  * des:
  */
 
-@Route(path = "/memorandum/fragment/memorandum")
+@Route(path = "/memorandum/fragment/home")
 public class MemorandumFragment extends ProgressBaseFragment {
 
     @Override
@@ -20,6 +20,6 @@ public class MemorandumFragment extends ProgressBaseFragment {
 
     @Override
     protected void onSettingUpView() {
-
+        dismissDialog();
     }
 }

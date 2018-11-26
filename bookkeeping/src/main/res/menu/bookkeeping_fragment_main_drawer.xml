@@ -3,25 +3,26 @@
 
     <group android:checkableBehavior="none">
         <item
-            android:id="@+id/nav_account_books"
+            android:id="@+id/nav_account_books_type"
             android:icon="@drawable/ic_launcher"
-            android:title="account_books" />
+            android:title="@string/account_books_type" />
         <item
             android:id="@+id/nav_count"
             android:icon="@drawable/ic_launcher"
-            android:title="count" />
+            android:title="@string/nav_count" />
     </group>
 
-    <item android:title="other">
+    <item android:title="@string/other">
         <menu>
-            <item
-                android:id="@+id/nav_feedback"
-                android:icon="@drawable/ic_launcher"
-                android:title="feedback" />
             <item
                 android:id="@+id/nav_setting"
                 android:icon="@drawable/ic_launcher"
-                android:title="setting" />
+                android:title="@string/setting" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_launcher"
+                android:title="@string/about" />
         </menu>
     </item>
+
 </menu>

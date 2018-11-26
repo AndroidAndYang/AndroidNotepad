@@ -42,9 +42,8 @@ public class LoginActivity extends ProgressBaseActivity implements LoginContract
 
     @Override
     public void register(Long userID) {
-        // TODO 跳转activity
         SPUtils.put(this, AppConstant.USER_ID, userID);
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, HomeActivity.class));
     }
 
     @Override

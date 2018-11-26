@@ -3,6 +3,9 @@ package com.seabig.common.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.seabig.common.R;
+import com.seabig.common.util.ToastUtils;
 
 /**
  * <pre>
@@ -35,7 +39,12 @@ public abstract class ProgressBaseFragment extends Fragment implements View.OnCl
         mRootView.findViewById(R.id.empty_view);
         mErrorTv = (TextView) mRootView.findViewById(R.id.error_tv);
         mErrorTv.setOnClickListener(this);
+        onPrepareOpt();
         return mRootView;
+    }
+
+    protected void onPrepareOpt() {
+
     }
 
     @Override
@@ -56,7 +65,6 @@ public abstract class ProgressBaseFragment extends Fragment implements View.OnCl
     protected abstract int onSettingUpContentViewResourceID();
 
     protected abstract void onSettingUpView();
-
 
 
     @Override
@@ -107,14 +115,30 @@ public abstract class ProgressBaseFragment extends Fragment implements View.OnCl
      * @param <T> View
      * @return 具体的控件
      */
-    protected <T extends View> T findViewById(int id)
-    {
+    protected <T extends View> T findViewById(int id) {
         return (T) contentView.findViewById(id);
+    }
+
+    protected void showToast(String msg) {
+        ToastUtils.getInstance().showToast(getActivity(), msg);
     }
 
     // 子类实现
     protected void onEmptyViewClick() {
 
+    }
+
+    public Toolbar initToolbar(int id, int titleId, int titleString) {
+        Toolbar toolbar = findViewById(id);
+        TextView textView = findViewById(titleId);
+        textView.setText(titleString);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
+        return toolbar;
     }
 
     @Override

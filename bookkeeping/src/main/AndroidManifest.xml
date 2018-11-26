@@ -3,4 +3,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <application>
+        <activity android:name=".ui.activity.MainActivity"/>
+        <activity android:name=".ui.activity.MsgActivity" />
+        <activity android:name=".ui.activity.SetActivity" />
+        <activity android:name=".ui.activity.AboutActivity" />
+        <activity android:name=".ui.activity.LicenseActivity" />
+    </application>
+
 </manifest>

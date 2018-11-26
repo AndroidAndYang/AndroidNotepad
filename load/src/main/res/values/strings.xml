@@ -21,10 +21,9 @@
     <string name="register_now">立即注册</string>
     <!-- ########### login end ########### -->
 
-    <!-- ########### main start ########### -->
-    <string name="navigation_drawer_close">close</string>
-    <string name="navigation_drawer_open">open</string>
-    <string name="load_activity_bar_msg">msg</string>
-    <!-- ########### login end ########### -->
+    <!-- ########### HomeActivity start ########### -->
+    <string name="load_nav_bookkeeping">记账本</string>
+    <string name="load_nav_memorandum">备忘录</string>
+    <!-- ########### HomeActivity end ########### -->
 
 </resources>

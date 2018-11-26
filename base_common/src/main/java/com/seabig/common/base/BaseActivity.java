@@ -123,7 +123,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 是否 给顶部状态栏绘制一个空白的view
      */
     public boolean isSetStatusBarColor() {
-        return true;
+        return false;
     }
 
     protected void onCreateSet() {
@@ -217,16 +217,24 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param rawId raw文件夹下的资源id
      * @return string
      */
-    public static String getRawString(@NonNull Context context, @RawRes int rawId) throws IOException {
+    public static String getRawString(@NonNull Context context, @RawRes int rawId) {
         InputStream is = context.getResources().openRawResource(rawId);
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
         String line;
-        while ((line = reader.readLine()) != null) {
-            sb.append(line).append("\n");
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         sb.deleteCharAt(sb.length() - 1);
-        reader.close();
+        try {
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return sb.toString();
     }
 

@@ -24,7 +24,7 @@ import com.seabig.common.ui.widget.LoadingLayout;
  *         desc Web界面
  */
 
-@Route(path = "/common/activity/webView")
+@Route(path = "/common/activity/web")
 public class WebViewActivity extends BaseActivity {
 
     private WebView mWebView;

@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.yjz.notepad">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".NotepadApplication"
         android:allowBackup="true"
@@ -13,7 +15,8 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
 
-        <activity android:name=".LauncherActivity"
+        <activity
+            android:name=".LauncherActivity"
             android:theme="@style/AppThemeLoading">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
