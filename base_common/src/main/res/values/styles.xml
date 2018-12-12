@@ -129,9 +129,4 @@
         <attr name="text_width" format="dimension" />
     </declare-styleable>
 
-    <style name="check_box_main" parent="@android:style/Widget.Material.CompoundButton.CheckBox">
-        <item name="android:colorControlActivated">@color/colorAccent</item>
-        <item name="android:colorControlNormal">@color/colorPrimary</item>
-    </style>
-
 </resources>

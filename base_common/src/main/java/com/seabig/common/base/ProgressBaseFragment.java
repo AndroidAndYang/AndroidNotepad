@@ -23,7 +23,7 @@ import com.seabig.common.util.ToastUtils;
  *             继承BaseFragment即可
  * </pre>
  */
-public abstract class ProgressBaseFragment extends Fragment implements View.OnClickListener, BaseView {
+public abstract class ProgressBaseFragment extends Fragment implements BaseView {
 
     private FrameLayout mRootView;
     private FrameLayout mContentView;
@@ -38,7 +38,12 @@ public abstract class ProgressBaseFragment extends Fragment implements View.OnCl
         mContentView = (FrameLayout) mRootView.findViewById(R.id.content_view);
         mRootView.findViewById(R.id.empty_view);
         mErrorTv = (TextView) mRootView.findViewById(R.id.error_tv);
-        mErrorTv.setOnClickListener(this);
+        mErrorTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onEmptyViewClick();
+            }
+        });
         onPrepareOpt();
         return mRootView;
     }
@@ -53,6 +58,10 @@ public abstract class ProgressBaseFragment extends Fragment implements View.OnCl
         // 加载 内容
         setRealContentView();
         onSettingUpView();
+        onSettingUpDate();
+    }
+
+    protected void onSettingUpDate() {
     }
 
     private void setRealContentView() {
@@ -97,14 +106,6 @@ public abstract class ProgressBaseFragment extends Fragment implements View.OnCl
             } else {
                 mRootView.getChildAt(i).setVisibility(View.GONE);
             }
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        int i = v.getId();
-        if (i == R.id.error_tv) {// 显示错误 重现请求网络
-            onEmptyViewClick();
         }
     }
 
