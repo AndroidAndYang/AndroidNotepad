@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://E:\Android\notepad\AndroidNotepad.iml" filepath="E:\Android\notepad\AndroidNotepad.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidNotepad.iml" filepath="$PROJECT_DIR$/AndroidNotepad.iml" />
+      <module fileurl="file://E:/Android/notepad/AndroidNotepad.iml" filepath="E:/Android/notepad/AndroidNotepad.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/base_common/base_common.iml" filepath="$PROJECT_DIR$/base_common/base_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/bookkeeping/bookkeeping.iml" filepath="$PROJECT_DIR$/bookkeeping/bookkeeping.iml" />

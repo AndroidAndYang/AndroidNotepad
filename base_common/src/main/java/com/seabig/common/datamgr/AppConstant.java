@@ -21,7 +21,7 @@ public class AppConstant {
     /**
      * httpRequest BaseUrl
      */
-    public static final String BASE_URL = "http://192.168.1.143:8080/";
+    public static final String BASE_URL = "http://192.168.1.6:8080/";
 
     /**
      * httpRequest 成功状态码

@@ -1,4 +1,5 @@
 package com.seabig.common.util;
+
 import android.text.TextUtils;
 
 import java.text.ParseException;
@@ -66,8 +67,7 @@ public class DateUtils {
      */
     public static String parseDate(long timeInMillis)
     {
-        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).format(new Date(timeInMillis * 1000l));
-        return date;
+        return new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).format(new Date(timeInMillis * 1000l));
     }
 
     /**
@@ -76,8 +76,7 @@ public class DateUtils {
     public static String parseDateTime(long timeInMillis)
     {
 
-        String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA).format(new Date(timeInMillis * 1000l));
-        return date;
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA).format(new Date(timeInMillis * 1000l));
     }
 
     /**
@@ -87,8 +86,7 @@ public class DateUtils {
     {
         try
         {
-            long epoch = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA).parse(s).getTime() / 1000;
-            return epoch;
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA).parse(s).getTime() / 1000;
         }
         catch (ParseException ex)
         {
@@ -103,8 +101,7 @@ public class DateUtils {
     {
         try
         {
-            long epoch = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).parse(s).getTime() / 1000;
-            return epoch;
+            return new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).parse(s).getTime() / 1000;
         }
         catch (Exception ex)
         {
@@ -311,4 +308,56 @@ public class DateUtils {
         return 0;
     }
 
+    /**
+     * 获取指定年月日是星期几
+     *
+     * @param ymd 具体的时间 例如：2018-11-14
+     * @return 星期几
+     */
+    public static String getWeek(String ymd)
+    {
+        String week = "";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd",Locale.CHINESE);
+        Calendar c = Calendar.getInstance();
+        try
+        {
+            c.setTime(format.parse(ymd));
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        int wek = c.get(Calendar.DAY_OF_WEEK);
+
+        if (wek == 1)
+        {
+            week += "星期日";
+        }
+        if (wek == 2)
+        {
+            week += "星期一";
+        }
+        if (wek == 3)
+        {
+            week += "星期二";
+        }
+        if (wek == 4)
+        {
+            week += "星期三";
+        }
+        if (wek == 5)
+        {
+            week += "星期四";
+        }
+        if (wek == 6)
+        {
+            week += "星期五";
+        }
+        if (wek == 7)
+        {
+            week += "星期六";
+        }
+        return week;
+    }
 }
