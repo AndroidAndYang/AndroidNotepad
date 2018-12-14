@@ -1,9 +1,5 @@
 package com.yjz.bookkeeping.ui.presenter;
 
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.model.Response;
-import com.lzy.okgo.request.PostRequest;
 import com.seabig.common.base.BasePresenter;
 import com.seabig.common.base.rx.RxHttpResponseCompat;
 import com.seabig.common.base.rx.subscribe.ProgressSubscribe;
@@ -11,7 +7,6 @@ import com.seabig.common.http.RetrofitUtil;
 import com.seabig.common.util.LogUtils;
 import com.yjz.bookkeeping.ui.api.ApiService;
 import com.yjz.bookkeeping.ui.bean.BookkeepingBean;
-import com.yjz.bookkeeping.ui.datamgr.BookkeepingType;
 import com.yjz.bookkeeping.ui.presenter.contract.BookkeepingContract;
 
 /**

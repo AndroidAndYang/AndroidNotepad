@@ -38,7 +38,7 @@ import java.util.Locale;
  * date:  2018/11/19
  * des:
  */
-@Route (path = "/bookkeeping/fragment/home")
+@Route(path = "/bookkeeping/fragment/home")
 public class BookkeepingFragment extends ProgressBaseFragment implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, BookkeepingContract.View {
 
     private DrawerLayout mDrawerLayout;
@@ -51,20 +51,17 @@ public class BookkeepingFragment extends ProgressBaseFragment implements Navigat
     private TextView mMoneyOutTv;
 
     @Override
-    protected void onPrepareOpt()
-    {
+    protected void onPrepareOpt() {
         setHasOptionsMenu(true);
     }
 
     @Override
-    protected int onSettingUpContentViewResourceID()
-    {
+    protected int onSettingUpContentViewResourceID() {
         return R.layout.bookkeeping_fragment_bookkeeping;
     }
 
     @Override
-    protected void onSettingUpView()
-    {
+    protected void onSettingUpView() {
         mDrawerLayout = findViewById(R.id.draw_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
@@ -87,8 +84,7 @@ public class BookkeepingFragment extends ProgressBaseFragment implements Navigat
     }
 
     @Override
-    protected void onSettingUpDate()
-    {
+    protected void onSettingUpDate() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月", Locale.CHINA);
         toolbarTitle.setText(dateFormat.format(calendar.getTime()));
@@ -101,24 +97,31 @@ public class BookkeepingFragment extends ProgressBaseFragment implements Navigat
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-    {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         (getActivity()).getMenuInflater().inflate(R.menu.bookkeeping_fragment_main_menu, menu);
         mMsgBadgeMenuItem = menu.findItem(R.id.action_edit);
         mMsgMenuItem = menu.findItem(R.id.msg);
         // TODO 根据消息控制 消息图片的显示与隐藏
-        if (userId > 0)
-        {
+        if (userId > 0) {
+            mMsgBadgeMenuItem.setVisible(true);
             mMsgMenuItem.setVisible(false);
         }
         // 设置menu点击事件
         mMsgBadgeMenuItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 startActivity(new Intent(getActivity(), MsgActivity.class));
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.msg) {
+            startActivity(new Intent(getActivity(), MsgActivity.class));
+        }
+        return true;
     }
 
     /**
@@ -128,20 +131,15 @@ public class BookkeepingFragment extends ProgressBaseFragment implements Navigat
      * @return isClick
      */
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item)
-    {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int i = item.getItemId();
-        if (i == R.id.nav_account_books_type)
-        {
+        if (i == R.id.nav_account_books_type) {
             showToast("nav_account_books");
-        } else if (i == R.id.nav_count)
-        {
+        } else if (i == R.id.nav_count) {
             showToast("nav_count");
-        } else if (i == R.id.nav_about)
-        {
+        } else if (i == R.id.nav_about) {
             startActivity(new Intent(getActivity(), AboutActivity.class));
-        } else if (i == R.id.nav_setting)
-        {
+        } else if (i == R.id.nav_setting) {
             startActivity(new Intent(getActivity(), SetActivity.class));
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -149,21 +147,18 @@ public class BookkeepingFragment extends ProgressBaseFragment implements Navigat
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.toolbar_title)
-        {
+        if (i == R.id.toolbar_title) {
             showToast("显示日期选择器");
         }
     }
 
     @Override
-    public void setBookkeepingData(BookkeepingBean dataBean)
-    {
+    public void setBookkeepingData(BookkeepingBean dataBean) {
         mMoneyInTv.setText(String.valueOf(dataBean.getAllMonthIn()));
         mMoneyOutTv.setText(String.valueOf(dataBean.getAllMonthOut()));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(new BookkeepingAdapter(dataBean.getDayData()));
+        mRecyclerView.setAdapter(new BookkeepingAdapter(getActivity(), dataBean.getDayData()));
     }
 }

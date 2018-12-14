@@ -1,10 +1,10 @@
 package com.yjz.bookkeeping.ui.adapter;
 
-import android.support.annotation.Nullable;
+import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.seabig.common.base.BaseRecyclerAdapter;
 import com.seabig.common.util.DateUtils;
 import com.yjz.bookkeeping.R;
 import com.yjz.bookkeeping.ui.bean.BookkeepingBean;
@@ -18,18 +18,17 @@ import java.util.Locale;
  * des:
  */
 
-public class BookkeepingAdapter extends BaseQuickAdapter<BookkeepingBean.DayDataBean, BaseViewHolder> {
+public class BookkeepingAdapter extends BaseRecyclerAdapter<BookkeepingBean.DayDataBean> {
 
-    public BookkeepingAdapter(@Nullable List<BookkeepingBean.DayDataBean> data)
-    {
-        super(R.layout.bookkeeping_adapter_bookkeeping, data);
+
+    public BookkeepingAdapter(@NonNull Context context, List<BookkeepingBean.DayDataBean> data) {
+        super(context, R.layout.bookkeeping_adapter_bookkeeping, data, true);
     }
 
     @Override
-    protected void convert(BaseViewHolder baseViewHolder, BookkeepingBean.DayDataBean dayDataBean)
-    {
-//        RecyclerView recyclerView = baseViewHolder.getView(R.id.recycler_view);
-        baseViewHolder.setText(R.id.week, String.format("%s %s", dayDataBean.getExactTimes(), DateUtils.getWeek(dayDataBean.getExactTimes())));
-        baseViewHolder.setText(R.id.money_detail, String.format(Locale.CHINA, "收入: %.2f 支出: %.2f", dayDataBean.getAllOut(), dayDataBean.getAllIn()));
+    public void convert(ViewHolder holder, BookkeepingBean.DayDataBean dayDataBean, int position) {
+        // RecyclerView recyclerView = (RecyclerView) holder.getView(R.id.recycler_view);
+        holder.setText(R.id.week, String.format("%s %s", dayDataBean.getExactTimes(), DateUtils.getWeek(dayDataBean.getExactTimes())));
+        holder.setText(R.id.money_detail, String.format(Locale.CHINA, "收入: %.2f 支出: %.2f", dayDataBean.getAllOut(), dayDataBean.getAllIn()));
     }
 }

@@ -7,6 +7,11 @@
         android:title="@string/load_nav_bookkeeping" />
 
     <item
+        android:id="@+id/navigation_add"
+        android:icon="@drawable/load_nav_add"
+        android:title="@string/add"/>
+
+    <item
         android:id="@+id/navigation_memorandum"
         android:icon="@drawable/load_nav_memorandum_normal"
         android:title="@string/load_nav_memorandum" />

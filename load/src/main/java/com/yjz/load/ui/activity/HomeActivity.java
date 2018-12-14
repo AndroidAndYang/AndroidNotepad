@@ -5,18 +5,15 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.model.Response;
-import com.lzy.okgo.request.PostRequest;
 import com.seabig.common.base.BaseActivity;
 import com.seabig.common.util.BottomNavigationViewHelper;
-import com.seabig.common.util.LogUtils;
 import com.yjz.load.R;
 import com.yjz.load.adapter.ViewPagerAdapter;
+import com.yjz.load.ui.widget.AddDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +30,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     private BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;
     private MenuItem menuItem;
+    private AddDialog addDialog;
 
     @Override
     protected int onSettingUpContentViewResourceID() {
@@ -62,6 +60,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             menuItem = item;
@@ -69,6 +68,27 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             if (i == R.id.navigation_bookkeeping) {
                 viewPager.setCurrentItem(0);
                 return true;
+            } else if (i == R.id.navigation_add) {
+                addDialog = new AddDialog(HomeActivity.this);
+                addDialog.setBookkeepingClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        addDialog.closeDialog();
+                        showToast("记账");
+                    }
+                }).setMemorandumClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        addDialog.closeDialog();
+                        showToast("备忘录");
+                    }
+                }).setCloseClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        addDialog.closeDialog();
+                    }
+                });
+                addDialog.show();
             } else if (i == R.id.navigation_memorandum) {
                 viewPager.setCurrentItem(1);
                 return true;
@@ -96,5 +116,28 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    private long lastBackKeyDownTick = 0;
+
+    //获取退出程序按下时间间隔(单位：毫秒)
+    protected long onGetExitAppPressMSecs() {
+        return 1500;
+    }
+
+    // 返回键监听
+    @Override
+    public void onBackPressed() {
+        long currentTick = System.currentTimeMillis();
+        if (currentTick - lastBackKeyDownTick > onGetExitAppPressMSecs()) {
+            if (addDialog.isShowing()) {
+                addDialog.closeDialog();
+            }
+            showToast(getStringByResId(R.string.press_again_app_exit));
+            lastBackKeyDownTick = currentTick;
+        } else {
+            finish();
+            System.exit(0);
+        }
     }
 }
