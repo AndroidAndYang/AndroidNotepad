@@ -32,7 +32,7 @@ public interface ApiService {
      * @return userId
      */
     // @FormUrlEncoded
-    @POST ("api/user/register")
+    @POST ("api/user/loginSuccess")
     Observable<BaseBean<Long>> getRegisterBean(@Query ("phone") String phone,
                                                @Query ("password") String password);
 

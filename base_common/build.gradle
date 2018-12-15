@@ -2,6 +2,8 @@ apply plugin: 'com.android.library'
 // Kotlin
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+// greenDao
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -43,6 +45,9 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
 
+    // MultiDex
+    compile rootProject.ext.dependencies["multidex"]
+
     // kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile rootProject.ext.dependencies["appcompat-v7"]
@@ -53,7 +58,10 @@ dependencies {
     // compile "com.google.code.gson:gson:2.7"
 
     // 网络加载库
-    compile rootProject.ext.dependencies["okGo"]
+    // compile rootProject.ext.dependencies["okGo"]
+
+    // greenDAO 数据库框架
+    compile 'org.greenrobot:greendao:3.2.2'
 
     // EventBus
     compile rootProject.ext.dependencies["eventbus"]

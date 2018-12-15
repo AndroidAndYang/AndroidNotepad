@@ -16,6 +16,6 @@ public interface LoginContract {
          *
          * @param userID 用户id
          */
-        void register(Long userID);
+        void loginSuccess(Long userID);
     }
 }

@@ -1,13 +1,13 @@
-package com.yjz.bookkeeping.ui.presenter;
+package com.yjz.bookkeeping.presenter;
 
 import com.seabig.common.base.BasePresenter;
 import com.seabig.common.base.rx.RxHttpResponseCompat;
 import com.seabig.common.base.rx.subscribe.ProgressSubscribe;
 import com.seabig.common.http.RetrofitUtil;
 import com.seabig.common.util.LogUtils;
-import com.yjz.bookkeeping.ui.api.ApiService;
-import com.yjz.bookkeeping.ui.bean.BookkeepingBean;
-import com.yjz.bookkeeping.ui.presenter.contract.BookkeepingContract;
+import com.yjz.bookkeeping.api.ApiService;
+import com.yjz.bookkeeping.bean.BookkeepingBean;
+import com.yjz.bookkeeping.presenter.contract.BookkeepingContract;
 
 /**
  * @author YJZ

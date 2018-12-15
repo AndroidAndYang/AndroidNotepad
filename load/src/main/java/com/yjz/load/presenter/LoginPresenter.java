@@ -21,7 +21,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> {
         super(view);
     }
 
-    public void registerUser(String userName, String pwd)
+    public void login(String userName, String pwd)
     {
         // 没有封装之前
         // Subscriber<Test> subscribe = new Subscriber<Test>() {
@@ -36,7 +36,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> {
         //     }
         //     @Override
         //     public void onNext(Test baseBean) {
-        //         LogUtils.e("register = " + baseBean.toString());
+        //         LogUtils.e("loginSuccess = " + baseBean.toString());
         //     }
         //     @Override
         //     public void onStart() {
@@ -61,7 +61,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> {
                     {
                         if (baseBean > 0)
                         {
-                            mView.register(baseBean);
+                            mView.loginSuccess(baseBean);
                         }
                     }
                 });

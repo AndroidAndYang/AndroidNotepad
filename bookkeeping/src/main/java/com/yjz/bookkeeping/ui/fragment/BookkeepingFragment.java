@@ -17,20 +17,26 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.seabig.common.base.ProgressBaseFragment;
+import com.seabig.common.datamgr.ARoutPath;
 import com.seabig.common.datamgr.AppConstant;
 import com.seabig.common.util.SPUtils;
+import com.seabig.common.util.ToastUtils;
+import com.yjz.bookkeeping.BookkeepingApplication;
 import com.yjz.bookkeeping.R;
+import com.yjz.bookkeeping.db.Type;
+import com.yjz.bookkeeping.db.TypeDao;
 import com.yjz.bookkeeping.ui.activity.AboutActivity;
 import com.yjz.bookkeeping.ui.activity.MsgActivity;
 import com.yjz.bookkeeping.ui.activity.SetActivity;
-import com.yjz.bookkeeping.ui.adapter.BookkeepingAdapter;
-import com.yjz.bookkeeping.ui.bean.BookkeepingBean;
-import com.yjz.bookkeeping.ui.datamgr.BookkeepingType;
-import com.yjz.bookkeeping.ui.presenter.BookkeepingPresenter;
-import com.yjz.bookkeeping.ui.presenter.contract.BookkeepingContract;
+import com.yjz.bookkeeping.adapter.BookkeepingAdapter;
+import com.yjz.bookkeeping.bean.BookkeepingBean;
+import com.yjz.bookkeeping.datamgr.BookkeepingType;
+import com.yjz.bookkeeping.presenter.BookkeepingPresenter;
+import com.yjz.bookkeeping.presenter.contract.BookkeepingContract;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -38,7 +44,7 @@ import java.util.Locale;
  * date:  2018/11/19
  * des:
  */
-@Route(path = "/bookkeeping/fragment/home")
+@Route(path = ARoutPath.BOOKKEEPING_FRAGMENT)
 public class BookkeepingFragment extends ProgressBaseFragment implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, BookkeepingContract.View {
 
     private DrawerLayout mDrawerLayout;
@@ -67,7 +73,6 @@ public class BookkeepingFragment extends ProgressBaseFragment implements Navigat
 
         mMoneyInTv = findViewById(R.id.money_in_tv);
         mMoneyOutTv = findViewById(R.id.money_out_tv);
-
         // Toolbar
         Toolbar toolbar = initToolbar(R.id.toolbar, R.id.toolbar_title, R.string.app_name);
         toolbarTitle = findViewById(R.id.toolbar_title);
@@ -90,7 +95,6 @@ public class BookkeepingFragment extends ProgressBaseFragment implements Navigat
         toolbarTitle.setText(dateFormat.format(calendar.getTime()));
 
         userId = (Long) SPUtils.get(getActivity(), AppConstant.USER_ID, 0L);
-        showToast("userId" + userId);
 
         BookkeepingPresenter presenter = new BookkeepingPresenter(this);
         presenter.getBookkeepingData(userId, BookkeepingType.LIFE, "2018-11");

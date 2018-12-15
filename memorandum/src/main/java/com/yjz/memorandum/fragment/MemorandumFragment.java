@@ -2,6 +2,7 @@ package com.yjz.memorandum.fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.seabig.common.base.ProgressBaseFragment;
+import com.seabig.common.datamgr.ARoutPath;
 import com.yjz.memorandum.R;
 
 /**
@@ -10,7 +11,7 @@ import com.yjz.memorandum.R;
  * des:
  */
 
-@Route(path = "/memorandum/fragment/home")
+@Route(path = ARoutPath.MEMORANDUM_FRAGMENT)
 public class MemorandumFragment extends ProgressBaseFragment {
 
     @Override

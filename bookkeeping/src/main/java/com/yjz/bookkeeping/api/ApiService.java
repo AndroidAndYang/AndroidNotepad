@@ -1,8 +1,8 @@
-package com.yjz.bookkeeping.ui.api;
+package com.yjz.bookkeeping.api;
 
 
 import com.seabig.common.bean.BaseBean;
-import com.yjz.bookkeeping.ui.bean.BookkeepingBean;
+import com.yjz.bookkeeping.bean.BookkeepingBean;
 
 import retrofit2.http.POST;
 import retrofit2.http.Query;

@@ -1,14 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yjz.bookkeeping">
+          package="com.yjz.bookkeeping">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application>
-        <activity android:name=".ui.activity.MainActivity"/>
-        <activity android:name=".ui.activity.MsgActivity" />
-        <activity android:name=".ui.activity.SetActivity" />
-        <activity android:name=".ui.activity.AboutActivity" />
-        <activity android:name=".ui.activity.LicenseActivity" />
+        <activity android:name="com.yjz.bookkeeping.ui.activity.MainActivity"/>
+        <activity android:name="com.yjz.bookkeeping.ui.activity.MsgActivity"/>
+        <activity android:name="com.yjz.bookkeeping.ui.activity.SetActivity"/>
+        <activity android:name=".ui.activity.BookkeepingActivity"/>
+        <activity android:name="com.yjz.bookkeeping.ui.activity.AboutActivity"/>
+        <activity android:name="com.yjz.bookkeeping.ui.activity.LicenseActivity"/>
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.seabig.common.base.ProgressBaseActivity;
+import com.seabig.common.datamgr.ARoutPath;
 import com.seabig.common.datamgr.AppConstant;
 import com.seabig.common.util.SPUtils;
 import com.yjz.load.R;
@@ -19,7 +20,7 @@ import com.yjz.load.presenter.contract.LoginContract;
  * des: 登录
  */
 
-@Route(path = "/load/activity/login")
+@Route(path = ARoutPath.LOAD_LOGIN_ACTIVITY)
 public class LoginActivity extends ProgressBaseActivity implements LoginContract.View, View.OnClickListener {
 
     private EditText mMobileEdt;
@@ -41,7 +42,7 @@ public class LoginActivity extends ProgressBaseActivity implements LoginContract
     }
 
     @Override
-    public void register(Long userID) {
+    public void loginSuccess(Long userID) {
         SPUtils.put(this, AppConstant.USER_ID, userID);
         startActivity(new Intent(this, HomeActivity.class));
     }
@@ -61,7 +62,7 @@ public class LoginActivity extends ProgressBaseActivity implements LoginContract
                 return;
             }
             LoginPresenter loginPresenter = new LoginPresenter(this);
-            loginPresenter.registerUser(mobileStr, pwdStr);
+            loginPresenter.login(mobileStr, pwdStr);
         }
     }
 }

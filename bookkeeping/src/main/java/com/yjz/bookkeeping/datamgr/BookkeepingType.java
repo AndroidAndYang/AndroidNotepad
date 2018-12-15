@@ -1,4 +1,4 @@
-package com.yjz.bookkeeping.ui.datamgr;
+package com.yjz.bookkeeping.datamgr;
 
 /**
  * @author YJZ

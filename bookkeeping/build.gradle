@@ -8,6 +8,8 @@ if (isModule.toBoolean()) {
 // Kotlin
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+// greenDao
+apply plugin: 'org.greenrobot.greendao'
 
 android {
 

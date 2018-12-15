@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">load</string>
 
-    <!-- ########### register start ########### -->
+    <!-- ########### loginSuccess start ########### -->
     <string name="mobile_register">手机号注册</string>
     <string name="mobile_hint">请输入注册的手机号</string>
     <string name="pwd">密码</string>
@@ -12,7 +12,7 @@
     <string name="register_error">注册信息不能为空</string>
     <string name="code_err">验证码填写错误</string>
     <string name="read_err">请阅读用户协议</string>
-    <!-- ########### register end ########### -->
+    <!-- ########### loginSuccess end ########### -->
 
     <!-- ########### login start ########### -->
     <string name="login_pwd_hint">请输入密码</string>

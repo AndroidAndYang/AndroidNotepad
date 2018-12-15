@@ -1,7 +1,7 @@
-package com.yjz.bookkeeping.ui.presenter.contract;
+package com.yjz.bookkeeping.presenter.contract;
 
 import com.seabig.common.base.BaseView;
-import com.yjz.bookkeeping.ui.bean.BookkeepingBean;
+import com.yjz.bookkeeping.bean.BookkeepingBean;
 
 /**
  * @author YJZ

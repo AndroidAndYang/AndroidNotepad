@@ -103,8 +103,6 @@ dependencies {
     })
 
     compile project(':base_common')
-    // MultiDex
-    compile rootProject.ext.dependencies["multidex"]
     // 只有是library的情况下才添加
     if (!isModule.toBoolean()) {
         compile project(':bookkeeping')

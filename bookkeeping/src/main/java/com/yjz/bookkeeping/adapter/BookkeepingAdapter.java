@@ -1,13 +1,12 @@
-package com.yjz.bookkeeping.ui.adapter;
+package com.yjz.bookkeeping.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 
 import com.seabig.common.base.BaseRecyclerAdapter;
 import com.seabig.common.util.DateUtils;
 import com.yjz.bookkeeping.R;
-import com.yjz.bookkeeping.ui.bean.BookkeepingBean;
+import com.yjz.bookkeeping.bean.BookkeepingBean;
 
 import java.util.List;
 import java.util.Locale;
@@ -27,7 +26,6 @@ public class BookkeepingAdapter extends BaseRecyclerAdapter<BookkeepingBean.DayD
 
     @Override
     public void convert(ViewHolder holder, BookkeepingBean.DayDataBean dayDataBean, int position) {
-        // RecyclerView recyclerView = (RecyclerView) holder.getView(R.id.recycler_view);
         holder.setText(R.id.week, String.format("%s %s", dayDataBean.getExactTimes(), DateUtils.getWeek(dayDataBean.getExactTimes())));
         holder.setText(R.id.money_detail, String.format(Locale.CHINA, "收入: %.2f 支出: %.2f", dayDataBean.getAllOut(), dayDataBean.getAllIn()));
     }

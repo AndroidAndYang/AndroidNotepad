@@ -28,7 +28,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> {
                     @Override
                     public void onNext(Long baseBean) {
                         if (baseBean > 0) {
-                            // mView.register(baseBean);
+                            // mView.loginSuccess(baseBean);
                         }
                     }
                 });

@@ -27,7 +27,6 @@ import java.util.Date;
  * des: 注册
  */
 
-@Route (path = "/load/activity/register")
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView mCaptchaImg;

@@ -2,6 +2,7 @@
           package="com.seabig.common">
 
     <application
+        android:name=".base.BaseApplication"
         android:allowBackup="true"
         android:supportsRtl="true">
 

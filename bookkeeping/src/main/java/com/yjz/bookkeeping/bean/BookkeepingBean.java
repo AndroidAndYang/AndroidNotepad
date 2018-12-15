@@ -1,4 +1,4 @@
-package com.yjz.bookkeeping.ui.bean;
+package com.yjz.bookkeeping.bean;
 
 import java.util.List;
 
