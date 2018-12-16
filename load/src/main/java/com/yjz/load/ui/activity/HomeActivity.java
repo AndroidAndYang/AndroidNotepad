@@ -149,9 +149,12 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         long currentTick = System.currentTimeMillis();
         if (currentTick - lastBackKeyDownTick > onGetExitAppPressMSecs())
         {
-            if (addDialog.isShowing())
+            if (addDialog != null)
             {
-                addDialog.closeDialog();
+                if (addDialog.isShowing())
+                {
+                    addDialog.closeDialog();
+                }
             }
             showToast(getStringByResId(R.string.press_again_app_exit));
             lastBackKeyDownTick = currentTick;

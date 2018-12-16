@@ -20,9 +20,9 @@ public class Type implements Parcelable {
     /** 分类 id */
     private Long id;
     /** 用户 id */
-    private String uid;
+    private Long uid;
     /** 分类类型（1，支出 2，收入） */
-    private int type;
+    private Long type;
     /** 位置索引 */
     private int index;
     /** 分类名称 */
@@ -32,15 +32,14 @@ public class Type implements Parcelable {
 
     protected Type(Parcel in) {
         id = in.readLong();
-        uid = in.readString();
-        type = in.readInt();
+        uid = in.readLong();
+        type = in.readLong();
         index = in.readInt();
         name = in.readString();
         icon = in.readString();
     }
-    @Generated(hash = 623657528)
-    public Type(Long id, String uid, int type, int index, String name,
-                String icon) {
+    @Generated(hash = 1783441715)
+    public Type(Long id, Long uid, Long type, int index, String name, String icon) {
         this.id = id;
         this.uid = uid;
         this.type = type;
@@ -70,20 +69,24 @@ public class Type implements Parcelable {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getUid() {
-        return this.uid;
-    }
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-    public int getType() {
-        return this.type;
-    }
-    public void setType(int type) {
-        this.type = type;
-    }
     public int getIndex() {
         return this.index;
+    }
+    public Long getUid()
+    {
+        return uid;
+    }
+    public void setUid(Long uid)
+    {
+        this.uid = uid;
+    }
+    public Long getType()
+    {
+        return type;
+    }
+    public void setType(Long type)
+    {
+        this.type = type;
     }
     public void setIndex(int index) {
         this.index = index;
@@ -109,8 +112,8 @@ public class Type implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeLong(id);
-        parcel.writeString(uid);
-        parcel.writeInt(type);
+        parcel.writeLong(uid);
+        parcel.writeLong(type);
         parcel.writeInt(index);
         parcel.writeString(name);
         parcel.writeString(icon);

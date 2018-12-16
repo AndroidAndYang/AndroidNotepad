@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 支出类型 -->
+    <array name="bookkeeping_out_type">
+        <item>餐饮</item>
+        <item>服饰</item>
+        <item>购物</item>
+        <item>孩子</item>
+        <item>交通</item>
+        <item>礼物</item>
+        <item>日用</item>
+        <item>蔬菜</item>
+        <item>数码</item>
+        <item>水果</item>
+        <item>通话</item>
+        <item>维修</item>
+        <item>学习</item>
+        <item>医疗</item>
+        <item>饮料</item>
+        <item>娱乐</item>
+        <item>住房</item>
+    </array>
+
+    <!-- 收入类型 -->
+    <array name="bookkeeping_income_type">
+
+    </array>
+</resources>

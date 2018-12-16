@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.seabig.common.base.ProgressBaseActivity;
+import com.seabig.common.base.BaseActivity;
 import com.seabig.common.datamgr.ARoutPath;
 import com.seabig.common.datamgr.AppConstant;
 import com.seabig.common.util.SPUtils;
@@ -21,7 +21,7 @@ import com.yjz.load.presenter.contract.LoginContract;
  */
 
 @Route(path = ARoutPath.LOAD_LOGIN_ACTIVITY)
-public class LoginActivity extends ProgressBaseActivity implements LoginContract.View, View.OnClickListener {
+public class LoginActivity extends BaseActivity implements LoginContract.View, View.OnClickListener {
 
     private EditText mMobileEdt;
     private EditText mPwdEdt;
@@ -38,13 +38,13 @@ public class LoginActivity extends ProgressBaseActivity implements LoginContract
         findViewById(R.id.login).setOnClickListener(this);
         mMobileEdt = (EditText) findViewById(R.id.mobile_edt);
         mPwdEdt = (EditText) findViewById(R.id.pwd_edt);
-
     }
 
     @Override
     public void loginSuccess(Long userID) {
         SPUtils.put(this, AppConstant.USER_ID, userID);
         startActivity(new Intent(this, HomeActivity.class));
+        finish();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class LoginActivity extends ProgressBaseActivity implements LoginContract
                 showToast("信息不能为空");
                 return;
             }
-            LoginPresenter loginPresenter = new LoginPresenter(this);
+            LoginPresenter loginPresenter = new LoginPresenter(this,this);
             loginPresenter.login(mobileStr, pwdStr);
         }
     }

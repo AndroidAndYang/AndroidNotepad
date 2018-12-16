@@ -1,5 +1,7 @@
 package com.yjz.load.presenter;
 
+import android.content.Context;
+
 import com.seabig.common.base.BasePresenter;
 import com.seabig.common.base.rx.RxHttpResponseCompat;
 import com.seabig.common.base.rx.subscribe.ProgressDialogSubscribe;
@@ -14,11 +16,15 @@ import com.yjz.load.presenter.contract.LoginContract;
  * des:
  */
 
-public class LoginPresenter extends BasePresenter<LoginContract.View> {
+public class LoginPresenter {
 
-    public LoginPresenter(LoginContract.View view)
+    private LoginContract.View mView;
+    private Context mContext;
+
+    public LoginPresenter(Context context,LoginContract.View view)
     {
-        super(view);
+        this.mContext = context;
+        this.mView = view;
     }
 
     public void login(String userName, String pwd)

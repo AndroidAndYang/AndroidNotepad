@@ -4,7 +4,10 @@ import android.app.Application;
 import android.content.Context;
 
 import com.seabig.common.callback.IApplicationDelegate;
+import com.seabig.common.datamgr.AppConstant;
 import com.seabig.common.util.LogUtils;
+import com.seabig.common.util.SPUtils;
+import com.seabig.common.util.ToastUtils;
 import com.yjz.bookkeeping.db.DaoMaster;
 import com.yjz.bookkeeping.db.DaoSession;
 

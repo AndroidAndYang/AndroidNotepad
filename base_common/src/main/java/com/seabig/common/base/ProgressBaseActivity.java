@@ -30,7 +30,7 @@ public abstract class ProgressBaseActivity extends AppCompatActivity implements 
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        mRootView = (FrameLayout) LayoutInflater.from(this).inflate(R.layout.common_fragment_progress, null, false);
+        mRootView = (FrameLayout) LayoutInflater.from(this).inflate(R.layout.common_activity_progress, null, false);
         mRootView.findViewById(R.id.progress_view);
         mContentView = (FrameLayout) mRootView.findViewById(R.id.content_view);
         mRootView.findViewById(R.id.empty_view);

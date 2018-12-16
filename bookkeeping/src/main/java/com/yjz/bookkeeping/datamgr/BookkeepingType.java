@@ -6,7 +6,7 @@ package com.yjz.bookkeeping.datamgr;
  * description 记账本类型
  */
 public class BookkeepingType {
-    
+
     /**
      * 日常记账本
      */
@@ -23,4 +23,16 @@ public class BookkeepingType {
      * 旅行记账本
      */
     public static final long TRAVEL = 4L;
+
+    /**
+     * 支出
+     */
+    public static final Long TYPE_OUT = 1L;
+
+    /**
+     * 收入
+     */
+    public static final Long TYPE_INCOME = 2L;
+
+
 }
