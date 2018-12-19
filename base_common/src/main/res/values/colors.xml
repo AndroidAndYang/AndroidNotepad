@@ -23,5 +23,6 @@
     <color name="text_color">#686868</color>
     <!-- 透明栏 -->
     <color name="transparent">#00000000</color>
-
+    <!-- 页面颜色 -->
+    <color name="page_bg">#f5f4f5</color>
 </resources>

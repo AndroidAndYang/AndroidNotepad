@@ -7,7 +7,7 @@ import android.widget.TextView;
 /**
  * @author YJZ
  */
- class ViewHolder {
+public class ViewHolder {
 
     private SparseArray<View> views;
     private View convertView;

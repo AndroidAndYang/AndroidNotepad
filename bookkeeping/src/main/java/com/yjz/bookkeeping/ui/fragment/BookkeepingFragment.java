@@ -89,7 +89,7 @@ public class BookkeepingFragment extends ProgressBaseFragment implements Navigat
     }
 
     @Override
-    protected void onSettingUpDate() {
+    protected void onSettingUpData() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月", Locale.CHINA);
         toolbarTitle.setText(dateFormat.format(calendar.getTime()));

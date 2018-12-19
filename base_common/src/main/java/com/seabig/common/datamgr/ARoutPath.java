@@ -25,7 +25,10 @@ public class ARoutPath {
      * BookkeepingFragment
      */
     public static final String BOOKKEEPING_FRAGMENT = "/bookkeeping/fragment/home";
-    public static final String BOOKKEEPING_ACTIVITY = "/bookkeeping/activity/main";
+    /**
+     * BookkeepingEditActivity
+     */
+    public static final String BOOKKEEPING_ACTIVITY = "/bookkeeping/activity/edit";
 
     // ---------------- memorandumModule ----------------
     /**

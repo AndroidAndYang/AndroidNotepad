@@ -58,10 +58,7 @@ public abstract class ProgressBaseFragment extends Fragment implements BaseView 
         // 加载 内容
         setRealContentView();
         onSettingUpView();
-        onSettingUpDate();
-    }
-
-    protected void onSettingUpDate() {
+        onSettingUpData();
     }
 
     private void setRealContentView() {
@@ -71,9 +68,36 @@ public abstract class ProgressBaseFragment extends Fragment implements BaseView 
         contentView = LayoutInflater.from(getActivity()).inflate(onSettingUpContentViewResourceID(), mContentView, true);
     }
 
+    /**
+     * 由子类初始化布局的资源ID
+     *
+     * @return xml Resource ID
+     */
     protected abstract int onSettingUpContentViewResourceID();
 
+    /**
+     * 由子类来对View进行设置
+     */
     protected abstract void onSettingUpView();
+
+    /**
+     * 由子类来对监听器进行设置
+     */
+    protected void onSettingUpListener() {
+    }
+
+    /**
+     * 由子类来对数据进行设置
+     */
+    protected void onSettingUpData() {
+    }
+
+    /**
+     * 用于在初始化View之前做一些事
+     */
+    protected void onBeforeSettingUpView(Bundle savedInstanceState) {
+    }
+
 
 
     @Override
