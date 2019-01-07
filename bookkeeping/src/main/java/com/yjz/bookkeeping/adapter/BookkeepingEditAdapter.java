@@ -22,6 +22,7 @@ import java.util.List;
 public class BookkeepingEditAdapter extends BaseRecyclerAdapter<Type> {
 
     private int clickPosition = -1;
+    private String imgName;
 
     public int getClickPosition() {
         return clickPosition;
@@ -31,8 +32,9 @@ public class BookkeepingEditAdapter extends BaseRecyclerAdapter<Type> {
         this.clickPosition = clickPosition;
     }
 
-    public BookkeepingEditAdapter(@NonNull Context context, List<Type> data) {
+    public BookkeepingEditAdapter(@NonNull Context context, List<Type> data,String imgName) {
         super(context, R.layout.bookkeeping_adapter_bookkeeping_edit, data, true);
+        this.imgName=imgName;
     }
 
     @Override
@@ -42,7 +44,7 @@ public class BookkeepingEditAdapter extends BaseRecyclerAdapter<Type> {
         LogUtils.e("type icon " + type.getIcon());
         int drawable;
         if (getClickPosition() == position) {
-            drawable = ResourceUtils.getImageResIdByName(mContext, "bookkeeping_out_type_select_" + clickPosition, "drawable");
+            drawable = ResourceUtils.getImageResIdByName(mContext, imgName + clickPosition, "drawable");
         } else {
             drawable = ResourceUtils.getImageResIdByName(mContext, type.getIcon(), "drawable");
         }

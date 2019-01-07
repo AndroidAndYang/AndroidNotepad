@@ -6,15 +6,24 @@
         android:label="@string/app_name"
         android:supportsRtl="true">
 
+        <!-- 主界面 -->
         <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 消息 -->
         <activity android:name=".ui.activity.MsgActivity" />
+        <!-- 设置界面 -->
         <activity android:name=".ui.activity.SetActivity" />
+        <!-- 记账 -->
+        <activity
+            android:name=".ui.activity.BookkeepingEditActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <!-- 关于 -->
         <activity android:name=".ui.activity.AboutActivity" />
+        <!-- 协议 -->
         <activity android:name=".ui.activity.LicenseActivity" />
 
     </application>

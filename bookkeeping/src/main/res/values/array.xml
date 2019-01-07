@@ -23,7 +23,11 @@
 
     <!-- 收入类型 -->
     <array name="bookkeeping_income_type">
-
+        <item>工资</item>
+        <item>兼职</item>
+        <item>理财</item>
+        <item>礼金</item>
+        <item>其它</item>
     </array>
 
 </resources>

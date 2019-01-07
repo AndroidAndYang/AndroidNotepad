@@ -4,7 +4,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.seabig.common.base.BaseActivity;
@@ -18,7 +18,8 @@ import com.yjz.bookkeeping.adapter.BookkeepingEditFragmentAdapter;
 import com.yjz.bookkeeping.datamgr.BookkeepingType;
 import com.yjz.bookkeeping.db.Type;
 import com.yjz.bookkeeping.db.TypeDao;
-import com.yjz.bookkeeping.ui.fragment.BookkeepingEditFragment;
+import com.yjz.bookkeeping.ui.fragment.BookkeepingEditInFragment;
+import com.yjz.bookkeeping.ui.fragment.BookkeepingEditOutFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,9 +31,15 @@ import java.util.List;
  *         description
  */
 @Route(path = ARoutPath.BOOKKEEPING_ACTIVITY)
-public class BookkeepingEditActivity extends BaseActivity implements View.OnClickListener {
+public class BookkeepingEditActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
     private final String[] TITLE_Arr = new String[]{"支出", "收入"};
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
+    public ImageView mSaveImg;
+    public int position;
+    private BookkeepingEditOutFragment outFragment;
+    private BookkeepingEditInFragment inFragment;
 
     @Override
     protected int onSettingUpContentViewResourceID() {
@@ -41,36 +48,39 @@ public class BookkeepingEditActivity extends BaseActivity implements View.OnClic
 
     @Override
     protected void onSettingUpView() {
-        findViewById(R.id.cancel).setOnClickListener(this);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        viewPager.setOffscreenPageLimit(0);
-
-        List<Fragment> fragmentList = new ArrayList<>(2);
-        BookkeepingEditFragment outFragment = BookkeepingEditFragment.newInstance(BookkeepingType.TYPE_OUT);
-        BookkeepingEditFragment inFragment = BookkeepingEditFragment.newInstance(BookkeepingType.TYPE_INCOME);
-        fragmentList.add(outFragment);
-        fragmentList.add(inFragment);
-        BookkeepingEditFragmentAdapter adapter = new BookkeepingEditFragmentAdapter(getSupportFragmentManager(), fragmentList, Arrays.asList(TITLE_Arr));
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        findViewById(R.id.back).setOnClickListener(this);
+        mSaveImg = (ImageView) findViewById(R.id.save);
+        mSaveImg.setOnClickListener(this);
+        mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        mViewPager.setOffscreenPageLimit(0);
+        mViewPager.addOnPageChangeListener(this);
     }
-
 
     @Override
     protected void onSettingUpData() {
+
         Long userId = (Long) SPUtils.get(this, AppConstant.USER_ID, 0L);
         TypeDao dao = BookkeepingApplication.getInstance().getSession().getTypeDao();
         List<Type> list = dao.queryBuilder().where(TypeDao.Properties.Uid.eq(userId)).list();
         LogUtils.e("list = " + list.size());
         if (list.size() <= 0) {
-            saveTypeData(userId, dao, BookkeepingType.TYPE_OUT);
-            // TODO 收入数据
-            // saveTypeData(uid, dao, AppConfig.TYPE_INCOME);
+            saveOutTypeData(userId, dao, BookkeepingType.TYPE_OUT);
+            saveOutTypeData(userId, dao, BookkeepingType.TYPE_INCOME);
         }
+
+        List<Fragment> fragmentList = new ArrayList<>(2);
+        outFragment = new BookkeepingEditOutFragment();
+        inFragment = new BookkeepingEditInFragment();
+        fragmentList.add(outFragment);
+        fragmentList.add(inFragment);
+        BookkeepingEditFragmentAdapter adapter = new BookkeepingEditFragmentAdapter(getSupportFragmentManager(), fragmentList, Arrays.asList(TITLE_Arr));
+        mViewPager.setAdapter(adapter);
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
-    private void saveTypeData(Long uid, TypeDao dao, Long type) {
+
+    private void saveOutTypeData(Long uid, TypeDao dao, Long type) {
         String[] types;
         if (type.equals(BookkeepingType.TYPE_OUT)) {
             types = getResources().getStringArray(R.array.bookkeeping_out_type);
@@ -92,8 +102,29 @@ public class BookkeepingEditActivity extends BaseActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.cancel) {
+        if (i == R.id.back) {
             finish();
+        } else if (i == R.id.save) {
+            if (position == 0) {
+                outFragment.post();
+            } else {
+                inFragment.post();
+            }
         }
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        this.position = position;
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 }

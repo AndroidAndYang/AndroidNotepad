@@ -81,7 +81,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                     //给StatusBar着色
                     View view = new View(this);
                     view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight()));
-                    view.setBackgroundColor(ContextCompat.getColor(this, getStatusColor(mStatusColor)));
+                    view.setBackgroundColor(ContextCompat.getColor(this, getStatusColor()));
                     contentView.addView(view);
                 }
             }
@@ -89,7 +89,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             // 状态栏与标题栏颜色保持一致，并兼容到Android4.4以下
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(ContextCompat.getColor(this, getStatusColor(mStatusColor)));
+                window.setStatusBarColor(ContextCompat.getColor(this, getStatusColor()));
             }
         }
         onSettingUpView();
@@ -238,7 +238,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         return sb.toString();
     }
 
-    public int getStatusColor(int mStatusColor) {
+    public int getStatusColor() {
         return mStatusColor;
     }
 

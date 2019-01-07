@@ -43,7 +43,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    public int getStatusColor(int mStatusColor)
+    public int getStatusColor()
     {
         return R.color.black_alpha_20;
     }

@@ -32,6 +32,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, V
     }
 
     @Override
+    public int getStatusColor() {
+        return R.color.black_alpha_20;
+    }
+
+    @Override
     protected void onSettingUpView() {
         findViewById(R.id.forget_pwd).setOnClickListener(this);
         findViewById(R.id.register_now).setOnClickListener(this);

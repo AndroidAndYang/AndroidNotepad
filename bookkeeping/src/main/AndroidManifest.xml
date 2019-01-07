@@ -4,12 +4,17 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application>
-        <activity android:name=".ui.activity.MainActivity" />
+        <!-- 消息 -->
         <activity android:name=".ui.activity.MsgActivity" />
+        <!-- 设置界面 -->
         <activity android:name=".ui.activity.SetActivity" />
+        <!-- 记账 -->
         <activity
-            android:name=".ui.activity.BookkeepingEditActivity"/>
-        <activity android:name="ui.activity.AboutActivity" />
+            android:name=".ui.activity.BookkeepingEditActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <!-- 关于 -->
+        <activity android:name=".ui.activity.AboutActivity" />
+        <!-- 协议 -->
         <activity android:name=".ui.activity.LicenseActivity" />
     </application>
 
