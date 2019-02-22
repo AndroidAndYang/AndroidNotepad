@@ -6,7 +6,7 @@ import com.seabig.common.base.rx.subscribe.ProgressSubscribe;
 import com.seabig.common.http.RetrofitUtil;
 import com.seabig.common.util.LogUtils;
 import com.yjz.bookkeeping.api.ApiService;
-import com.yjz.bookkeeping.bean.BookkeepingBean;
+import com.yjz.bookkeeping.bean.BookkeepingAllBean;
 import com.yjz.bookkeeping.presenter.contract.BookkeepingContract;
 
 /**
@@ -25,10 +25,10 @@ public class BookkeepingPresenter extends BasePresenter<BookkeepingContract.View
     {
         RetrofitUtil.getApi(ApiService.class)
                 .getBookkeepingData(userId, type, yearAndMonth)
-                .compose(RxHttpResponseCompat.<BookkeepingBean>compatResult())
-                .subscribe(new ProgressSubscribe<BookkeepingBean>(mContext, mView) {
+                .compose(RxHttpResponseCompat.<BookkeepingAllBean>compatResult())
+                .subscribe(new ProgressSubscribe<BookkeepingAllBean>(mContext, mView) {
                     @Override
-                    public void onNext(BookkeepingBean bookkeepingBean)
+                    public void onNext(BookkeepingAllBean bookkeepingBean)
                     {
                         LogUtils.e("bookkeepingBean = " + bookkeepingBean.toString());
                         mView.setBookkeepingData(bookkeepingBean);

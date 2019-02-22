@@ -1,5 +1,6 @@
 package com.yjz.bookkeeping.ui.activity;
 
+import android.content.DialogInterface;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -10,16 +11,22 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.seabig.common.base.BaseActivity;
 import com.seabig.common.datamgr.ARoutPath;
 import com.seabig.common.datamgr.AppConstant;
+import com.seabig.common.util.DialogUtil;
 import com.seabig.common.util.LogUtils;
 import com.seabig.common.util.SPUtils;
 import com.yjz.bookkeeping.BookkeepingApplication;
 import com.yjz.bookkeeping.R;
 import com.yjz.bookkeeping.adapter.BookkeepingEditFragmentAdapter;
+import com.yjz.bookkeeping.bean.BookkeepingAllBean;
 import com.yjz.bookkeeping.datamgr.BookkeepingType;
 import com.yjz.bookkeeping.db.Type;
 import com.yjz.bookkeeping.db.TypeDao;
+import com.yjz.bookkeeping.event.BookkeepingEditEvent;
 import com.yjz.bookkeeping.ui.fragment.BookkeepingEditInFragment;
 import com.yjz.bookkeeping.ui.fragment.BookkeepingEditOutFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,8 +72,8 @@ public class BookkeepingEditActivity extends BaseActivity implements View.OnClic
         List<Type> list = dao.queryBuilder().where(TypeDao.Properties.Uid.eq(userId)).list();
         LogUtils.e("list = " + list.size());
         if (list.size() <= 0) {
-            saveOutTypeData(userId, dao, BookkeepingType.TYPE_OUT);
-            saveOutTypeData(userId, dao, BookkeepingType.TYPE_INCOME);
+            saveOutOrInLocalData(userId, dao, BookkeepingType.TYPE_OUT);
+            saveOutOrInLocalData(userId, dao, BookkeepingType.TYPE_INCOME);
         }
 
         List<Fragment> fragmentList = new ArrayList<>(2);
@@ -79,8 +86,7 @@ public class BookkeepingEditActivity extends BaseActivity implements View.OnClic
         mTabLayout.setupWithViewPager(mViewPager);
     }
 
-
-    private void saveOutTypeData(Long uid, TypeDao dao, Long type) {
+    private void saveOutOrInLocalData(Long uid, TypeDao dao, Long type) {
         String[] types;
         if (type.equals(BookkeepingType.TYPE_OUT)) {
             types = getResources().getStringArray(R.array.bookkeeping_out_type);
@@ -105,11 +111,21 @@ public class BookkeepingEditActivity extends BaseActivity implements View.OnClic
         if (i == R.id.back) {
             finish();
         } else if (i == R.id.save) {
-            if (position == 0) {
-                outFragment.post();
-            } else {
-                inFragment.post();
-            }
+            DialogUtil.showDialog(this, "确定记录当前数据？", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (position == 0) {
+                        outFragment.post();
+                    } else {
+                        inFragment.post();
+                    }
+                }
+            }, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
         }
     }
 

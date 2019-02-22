@@ -1,228 +1,124 @@
 package com.yjz.bookkeeping.bean;
 
-import java.util.List;
+
+import java.io.Serializable;
 
 /**
- * @author YJZ
- * date 2018/12/13
- * description: 记账本首页数据
+ * author： YJZ
+ * date:  2019/2/21
+ * des:  添加记账数据bean
  */
-public class BookkeepingBean {
-    /**
-     * allMonthOut : 2222.7
-     * dayData : [{"allIn":2000,"allOut":0,"userBookkeepingBeans":[{"userId":2,"des":"餐饮","name":"日常记账本","moneyType":0,"content":"外快","money":1000,"exactTime":"2018-11-14"},{"userId":2,"des":"餐饮","name":"日常记账本","moneyType":0,"content":"外快3","money":1000,"exactTime":"2018-11-14"}]},{"allIn":1224.4,"allOut":2222.7,"userBookkeepingBeans":[{"userId":2,"des":"旅游","name":"日常记账本","moneyType":1,"content":"人情红包","money":1000,"exactTime":"2018-11-28"},{"userId":2,"des":"餐饮","name":"日常记账本","moneyType":0,"content":"外快1","money":1224.4,"exactTime":"2018-11-28"},{"userId":2,"des":"餐饮","name":"日常记账本","moneyType":1,"content":"支出2","money":1222.7,"exactTime":"2018-11-28"}]}]
-     * allMonthIn : 3224.4
-     */
 
-    private double allMonthOut;
-    private double allMonthIn;
-    private List<DayDataBean> dayData;
+public class BookkeepingBean implements Serializable{
 
-    public double getAllMonthOut()
-    {
-        return allMonthOut;
+    private Long id;
+    // 用户ID
+    private Long userId;
+    // 账本类型
+    private Long bookTypeId;
+    // 记账类型（例餐饮，出行）
+    private Long classificationId;
+    // 支出還是收入
+    private Long moneyType;
+    // 内容
+    private String content;
+    // 金额
+    private float money;
+    // 年月数据
+    private String addTime;
+    // 记账详细时间
+    private String exactAddTime;
+
+    public BookkeepingBean() {
     }
 
-    public void setAllMonthOut(double allMonthOut)
-    {
-        this.allMonthOut = allMonthOut;
+    public BookkeepingBean(Long id, Long userId, Long bookTypeId, Long classificationId, Long moneyType, String content, float money, String addTime, String exactAddTime) {
+        this.id = id;
+        this.userId = userId;
+        this.bookTypeId = bookTypeId;
+        this.classificationId = classificationId;
+        this.moneyType = moneyType;
+        this.content = content;
+        this.money = money;
+        this.addTime = addTime;
+        this.exactAddTime = exactAddTime;
     }
 
-    public double getAllMonthIn()
-    {
-        return allMonthIn;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setAllMonthIn(double allMonthIn)
-    {
-        this.allMonthIn = allMonthIn;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public List<DayDataBean> getDayData()
-    {
-        return dayData;
+    public Long getBookTypeId() {
+        return bookTypeId;
     }
 
-    public void setDayData(List<DayDataBean> dayData)
-    {
-        this.dayData = dayData;
+    public void setBookTypeId(Long bookTypeId) {
+        this.bookTypeId = bookTypeId;
     }
 
-    public static class DayDataBean {
-        /**
-         * allIn : 2000.0
-         * allOut : 0.0
-         * userBookkeepingBeans : [{"userId":2,"des":"餐饮","name":"日常记账本","moneyType":0,"content":"外快","money":1000,"exactTime":"2018-11-14"},{"userId":2,"des":"餐饮","name":"日常记账本","moneyType":0,"content":"外快3","money":1000,"exactTime":"2018-11-14"}]
-         */
+    public Long getClassificationId() {
+        return classificationId;
+    }
 
-        private double allIn;
-        private double allOut;
-        private String exactTimes;
-        private List<UserBookkeepingBeansBean> userBookkeepingBeans;
+    public void setClassificationId(Long classificationId) {
+        this.classificationId = classificationId;
+    }
 
-        public double getAllIn()
-        {
-            return allIn;
-        }
+    public Long getMoneyType() {
+        return moneyType;
+    }
 
-        public void setAllIn(double allIn)
-        {
-            this.allIn = allIn;
-        }
+    public void setMoneyType(Long moneyType) {
+        this.moneyType = moneyType;
+    }
 
-        public double getAllOut()
-        {
-            return allOut;
-        }
+    public String getContent() {
+        return content;
+    }
 
-        public void setAllOut(double allOut)
-        {
-            this.allOut = allOut;
-        }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-        public String getExactTimes()
-        {
-            return exactTimes;
-        }
+    public float getMoney() {
+        return money;
+    }
 
-        public void setExactTimes(String exactTimes)
-        {
-            this.exactTimes = exactTimes;
-        }
+    public void setMoney(float money) {
+        this.money = money;
+    }
 
-        public List<UserBookkeepingBeansBean> getUserBookkeepingBeans()
-        {
-            return userBookkeepingBeans;
-        }
+    public String getAddTime() {
+        return addTime;
+    }
 
-        public void setUserBookkeepingBeans(List<UserBookkeepingBeansBean> userBookkeepingBeans)
-        {
-            this.userBookkeepingBeans = userBookkeepingBeans;
-        }
+    public void setAddTime(String addTime) {
+        this.addTime = addTime;
+    }
 
-        public static class UserBookkeepingBeansBean {
-            /**
-             * userId : 2
-             * des : 餐饮
-             * name : 日常记账本
-             * moneyType : 0
-             * content : 外快
-             * money : 1000.0
-             * exactTime : 2018-11-14
-             */
+    public String getExactAddTime() {
+        return exactAddTime;
+    }
 
-            private int userId;
-            private String des;
-            private String name;
-            private int moneyType;
-            private String content;
-            private double money;
-            private String exactTime;
-
-            public int getUserId()
-            {
-                return userId;
-            }
-
-            public void setUserId(int userId)
-            {
-                this.userId = userId;
-            }
-
-            public String getDes()
-            {
-                return des;
-            }
-
-            public void setDes(String des)
-            {
-                this.des = des;
-            }
-
-            public String getName()
-            {
-                return name;
-            }
-
-            public void setName(String name)
-            {
-                this.name = name;
-            }
-
-            public int getMoneyType()
-            {
-                return moneyType;
-            }
-
-            public void setMoneyType(int moneyType)
-            {
-                this.moneyType = moneyType;
-            }
-
-            public String getContent()
-            {
-                return content;
-            }
-
-            public void setContent(String content)
-            {
-                this.content = content;
-            }
-
-            public double getMoney()
-            {
-                return money;
-            }
-
-            public void setMoney(double money)
-            {
-                this.money = money;
-            }
-
-            public String getExactTime()
-            {
-                return exactTime;
-            }
-
-            public void setExactTime(String exactTime)
-            {
-                this.exactTime = exactTime;
-            }
-
-            @Override
-            public String toString()
-            {
-                return "UserBookkeepingBeansBean{" +
-                        "userId=" + userId +
-                        ", des='" + des + '\'' +
-                        ", name='" + name + '\'' +
-                        ", moneyType=" + moneyType +
-                        ", content='" + content + '\'' +
-                        ", money=" + money +
-                        ", exactTime='" + exactTime + '\'' +
-                        '}';
-            }
-        }
-
-        @Override
-        public String toString()
-        {
-            return "DayDataBean{" +
-                    "allIn=" + allIn +
-                    ", allOut=" + allOut +
-                    ", exactTimes=" + exactTimes +
-                    ", userBookkeepingBeans=" + userBookkeepingBeans +
-                    '}';
-        }
+    public void setExactAddTime(String exactAddTime) {
+        this.exactAddTime = exactAddTime;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "BookkeepingBean{" +
-                "allMonthOut=" + allMonthOut +
-                ", allMonthIn=" + allMonthIn +
-                ", dayData=" + dayData +
+                "userId=" + userId +
+                ", bookTypeId=" + bookTypeId +
+                ", classificationId=" + classificationId +
+                ", moneyType=" + moneyType +
+                ", content='" + content + '\'' +
+                ", money=" + money +
+                ", addTime='" + addTime + '\'' +
+                ", exactAddTime=" + exactAddTime +
                 '}';
     }
 }

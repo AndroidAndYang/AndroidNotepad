@@ -29,7 +29,6 @@ public class RxHttpResponseCompat {
                 return baseBeanObservable.flatMap(new Func1<BaseBean<T>, Observable<T>>() {
                     @Override
                     public Observable<T> call(final BaseBean<T> tBaseBean) {
-                        LogUtils.e("tBaseBean.toString() = " + tBaseBean.toString());
                         if (tBaseBean.getStatus() == AppConstant.RESPONSE_STATUS_CODE) {
                             return Observable.create(new Observable.OnSubscribe<T>() {
                                 @Override

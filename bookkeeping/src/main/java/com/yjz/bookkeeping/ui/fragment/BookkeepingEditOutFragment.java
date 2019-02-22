@@ -3,7 +3,7 @@ package com.yjz.bookkeeping.ui.fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.InputFilter;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,11 +18,20 @@ import com.seabig.common.util.SPUtils;
 import com.yjz.bookkeeping.BookkeepingApplication;
 import com.yjz.bookkeeping.R;
 import com.yjz.bookkeeping.adapter.BookkeepingEditAdapter;
+import com.yjz.bookkeeping.bean.BookkeepingAllBean;
+import com.yjz.bookkeeping.bean.BookkeepingBean;
 import com.yjz.bookkeeping.datamgr.BookkeepingType;
 import com.yjz.bookkeeping.db.Type;
 import com.yjz.bookkeeping.db.TypeDao;
+import com.yjz.bookkeeping.event.BookkeepingEditEvent;
+import com.yjz.bookkeeping.presenter.BookkeepingCommitPresenter;
+import com.yjz.bookkeeping.presenter.contract.BookkeepingCommitContract;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -32,7 +41,7 @@ import java.util.Locale;
  * des: 账目编辑页
  */
 
-public class BookkeepingEditOutFragment extends DelayLoadFragment {
+public class BookkeepingEditOutFragment extends DelayLoadFragment implements BookkeepingCommitContract.View {
 
     private RecyclerView mRecyclerView;
     private TextView mTypeNameTv;
@@ -41,6 +50,7 @@ public class BookkeepingEditOutFragment extends DelayLoadFragment {
     private int clickPosition;
     private EditText mNoteEdt;
     private TextView mTimeTv;
+    private BookkeepingCommitPresenter commitPresenter;
 
     @Override
     protected int onSettingUpContentViewResourceID() {
@@ -86,7 +96,6 @@ public class BookkeepingEditOutFragment extends DelayLoadFragment {
                 clickPosition = position;
                 adapter.setClickPosition(position);
                 adapter.notifyDataSetChanged();
-
                 mTypeImg.setImageDrawable(ContextCompat.getDrawable(getActivity(), ResourceUtils.getImageResIdByName(getActivity(), "bookkeeping_out_type_select_" + position, "drawable")));
                 mTypeNameTv.setText(adapter.getItem(position).getName());
             }
@@ -98,7 +107,50 @@ public class BookkeepingEditOutFragment extends DelayLoadFragment {
         String typeNameStr = mTypeNameTv.getText().toString();
         String moneyStr = mMoneyEdt.getText().toString();
         String noteStr = mNoteEdt.getText().toString();
-        showToast("typeName = " + typeNameStr + " money = " + moneyStr + " noteStr = " + noteStr);
+
+        if (TextUtils.isEmpty(moneyStr)){
+            showToast("请输入金额");
+            return;
+        }
+
+        if (commitPresenter == null) {
+            commitPresenter = new BookkeepingCommitPresenter(getActivity(), this);
+        }
+
+        BookkeepingBean bookkeepingBean = new BookkeepingBean();
+
+        Calendar calendar = Calendar.getInstance();
+        int yearStr = calendar.get(Calendar.YEAR);//获取年份
+        int month = calendar.get(Calendar.MONTH) + 1;//获取月份
+
+        bookkeepingBean.setUserId((Long) SPUtils.get(getActivity(), AppConstant.USER_ID, 0L));
+        bookkeepingBean.setBookTypeId(1L);
+        // 18 为支出type的内容长度
+        bookkeepingBean.setClassificationId((long) (clickPosition + 1));
+        bookkeepingBean.setMoneyType(0L);
+        bookkeepingBean.setContent(TextUtils.isEmpty(noteStr) ? typeNameStr : noteStr);
+        bookkeepingBean.setMoney(Float.parseFloat(moneyStr));
+        bookkeepingBean.setAddTime(String.format(Locale.CHINA, "%s-%s", yearStr, month));
+
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        bookkeepingBean.setExactAddTime(formatDate.format(new Date()));
+
+        commitPresenter.commit(bookkeepingBean);
     }
 
+    @Override
+    public void onSuccess(BookkeepingBean bookkeepingBean, boolean isSuccess) {
+        showToast(isSuccess ? "新增成功" : "新增失败");
+        if (isSuccess){
+            BookkeepingAllBean.DayDataBean.UserBookkeepingBeansBean userBookkeepingBeansBean = new BookkeepingAllBean.DayDataBean.UserBookkeepingBeansBean();
+            userBookkeepingBeansBean.setMoney(bookkeepingBean.getMoney());
+            userBookkeepingBeansBean.setContent(bookkeepingBean.getContent());
+            userBookkeepingBeansBean.setExactTime(bookkeepingBean.getExactAddTime());
+            userBookkeepingBeansBean.setMoneyType(0);
+            userBookkeepingBeansBean.setName("日常记账本");
+            EventBus.getDefault().post(new BookkeepingEditEvent(userBookkeepingBeansBean));
+            commitPresenter = null;
+            (getActivity()).finish();
+        }
+    }
 }

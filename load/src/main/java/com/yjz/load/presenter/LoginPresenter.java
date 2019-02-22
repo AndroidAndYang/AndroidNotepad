@@ -2,7 +2,6 @@ package com.yjz.load.presenter;
 
 import android.content.Context;
 
-import com.seabig.common.base.BasePresenter;
 import com.seabig.common.base.rx.RxHttpResponseCompat;
 import com.seabig.common.base.rx.subscribe.ProgressDialogSubscribe;
 import com.seabig.common.http.RetrofitUtil;

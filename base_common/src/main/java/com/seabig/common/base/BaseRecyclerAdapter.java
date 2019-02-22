@@ -30,15 +30,13 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
     private OnRecyclerViewItemClickListen mOnRecyclerViewItemClickListen;
     private boolean isAddParent;
 
-    public BaseRecyclerAdapter(@NonNull Context context, int layoutResId, List<T> data)
-    {
+    public BaseRecyclerAdapter(@NonNull Context context, int layoutResId, List<T> data) {
         this.mData = data == null ? new ArrayList<T>() : new ArrayList<>(data);
         this.mContext = context;
         this.mLayoutResId = layoutResId;
     }
 
-    public BaseRecyclerAdapter(@NonNull Context context, int layoutResId, List<T> data, boolean isAddParent)
-    {
+    public BaseRecyclerAdapter(@NonNull Context context, int layoutResId, List<T> data, boolean isAddParent) {
         this.mData = data == null ? new ArrayList<T>() : new ArrayList<>(data);
         this.mContext = context;
         this.mLayoutResId = layoutResId;
@@ -55,23 +53,19 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
         void onItemClickListen(View view, int position);
     }
 
-    public T getItem(int position)
-    {
+    public T getItem(int position) {
         return position < 0 || position >= mData.size() ? null : mData.get(position);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-    {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(mLayoutResId, isAddParent ? parent : null, false);
         final ViewHolder holder = new ViewHolder(mContext, view);
         //给控件设置点击事件
-        if (mOnRecyclerViewItemClickListen != null)
-        {
+        if (mOnRecyclerViewItemClickListen != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     mOnRecyclerViewItemClickListen.onItemClickListen(view, holder.getLayoutPosition());
                 }
             });
@@ -80,8 +74,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position)
-    {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         convert(holder, mData.get(position), position);
     }
 
@@ -95,8 +88,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
     public abstract void convert(ViewHolder holder, T t, int position);
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return mData != null ? mData.size() : 0;
     }
 
@@ -109,8 +101,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
         private final Context mContext;
         private View mConvertView;
 
-        private ViewHolder(Context context, View itemView)
-        {
+        private ViewHolder(Context context, View itemView) {
             super(itemView);
             this.mContext = context;
             this.mConvertView = itemView;
@@ -120,122 +111,113 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
         /**
          * 每次操作子view前,执行此方法,若该子view已在SparseArray中z则直接返回,如不存在则实例化它并将其存放至SparseArray
          */
-        private <T extends View> T retrieveView(int viewId)
-        {
+        private <T extends View> T retrieveView(int viewId) {
             View view = mViews.get(viewId);
-            if (view == null)
-            {
+            if (view == null) {
                 view = mConvertView.findViewById(viewId);
                 mViews.put(viewId, view);
             }
             return (T) view;
         }
 
-        public View getView(int viewId)
-        {
+        public View getView(int viewId) {
             return retrieveView(viewId);
         }
 
         /**
          * 处理子View (根据具体情况还可增加setChecked,setTag,SetVisible等方法)
          */
-        public ViewHolder setText(int viewId, String value)
-        {
+        public ViewHolder setText(int viewId, String value) {
             TextView view = retrieveView(viewId);
             view.setText(value);
             return this;
         }
 
-        public ViewHolder setCharSequence(int viewId, CharSequence value)
-        {
+        public ViewHolder setCharSequence(int viewId, CharSequence value) {
             TextView view = retrieveView(viewId);
             view.setText(value);
             return this;
         }
 
-        public ViewHolder setImageResource(int viewId, int imageResId)
-        {
+        public ViewHolder setImageResource(int viewId, int imageResId) {
             ImageView view = retrieveView(viewId);
             view.setImageResource(imageResId);
             return this;
         }
 
-        public ViewHolder setImageResource(int viewId, Drawable drawable)
-        {
+        public ViewHolder setImageResource(int viewId, Drawable drawable) {
             ImageView view = retrieveView(viewId);
             view.setImageDrawable(drawable);
             return this;
         }
 
-        public ViewHolder setImageURI(int viewId, String imageURI)
-        {
+        public ViewHolder setImageURI(int viewId, String imageURI) {
             ImageView view = retrieveView(viewId);
             Glide.with(mContext).load(imageURI).into(view);
             return this;
         }
 
-        public ViewHolder setBackgroundColor(int viewId, int color)
-        {
+        public ViewHolder setBackgroundColor(int viewId, int color) {
             View view = retrieveView(viewId);
             view.setBackgroundColor(color);
             return this;
         }
 
 
-        public ViewHolder setBackground(int viewId, Drawable drawable)
-        {
+        public ViewHolder setBackground(int viewId, Drawable drawable) {
             View view = retrieveView(viewId);
             view.setBackground(drawable);
             return this;
         }
 
-        public ViewHolder setBackgroundColor(int viewId, Drawable drawable)
-        {
+        public ViewHolder setBackgroundColor(int viewId, Drawable drawable) {
             View view = retrieveView(viewId);
             view.setBackground(drawable);
             return this;
         }
 
-        public ViewHolder setVisible(int viewId, boolean isVisible)
-        {
+        public ViewHolder setVisible(int viewId, boolean isVisible) {
             View view = retrieveView(viewId);
             view.setVisibility(isVisible ? View.GONE : View.VISIBLE);
             return this;
         }
 
-        public ViewHolder setVisible(int viewId, int isVisible)
-        {
+        public ViewHolder setVisible(int viewId, int isVisible) {
             View view = retrieveView(viewId);
             view.setVisibility(isVisible);
             return this;
         }
 
-        public ViewHolder setOnClickListener(int viewId, View.OnClickListener onClickListener)
-        {
+        public ViewHolder setOnClickListener(int viewId, View.OnClickListener onClickListener) {
             View view = retrieveView(viewId);
             view.setOnClickListener(onClickListener);
             return this;
         }
 
-        public ViewHolder setClickable(int viewId, boolean clickable)
-        {
+        public ViewHolder setClickable(int viewId, boolean clickable) {
             View view = retrieveView(viewId);
             view.setClickable(clickable);
             return this;
         }
     }
 
-    public void remove(int index)
-    {
-        if (index >= 0 && index < getItemCount())
-        {
+    public List<T> getAll() {
+        return mData;
+    }
+
+    public void add(int index, T t) {
+        mData.add(index, t);
+        notifyItemInserted(index);
+    }
+
+    public void remove(int index) {
+        if (index >= 0 && index < getItemCount()) {
             mData.remove(index);
             notifyItemRemoved(index);
         }
     }
 
-    public void setOnRecyclerViewItemClickListen(OnRecyclerViewItemClickListen mOnRecyclerViewItemClickListen)
-    {
+    public void setOnRecyclerViewItemClickListen(OnRecyclerViewItemClickListen mOnRecyclerViewItemClickListen) {
         this.mOnRecyclerViewItemClickListen = mOnRecyclerViewItemClickListen;
     }
 }

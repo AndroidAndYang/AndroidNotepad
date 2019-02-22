@@ -1,7 +1,7 @@
 package com.yjz.bookkeeping.presenter.contract;
 
 import com.seabig.common.base.BaseView;
-import com.yjz.bookkeeping.bean.BookkeepingBean;
+import com.yjz.bookkeeping.bean.BookkeepingAllBean;
 
 /**
  * @author YJZ
@@ -11,6 +11,6 @@ import com.yjz.bookkeeping.bean.BookkeepingBean;
 public interface BookkeepingContract {
 
     interface View extends BaseView {
-        void setBookkeepingData(BookkeepingBean dataBean);
+        void setBookkeepingData(BookkeepingAllBean dataBean);
     }
 }
