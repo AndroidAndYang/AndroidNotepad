@@ -10,7 +10,7 @@ import java.util.List;
 public class BookkeepingAllBean {
     /**
      * allMonthOut : 2222.7
-     * dayData : [{"allIn":2000,"allOut":0,"userBookkeepingBeans":[{"userId":2,"des":"餐饮","name":"日常记账本","moneyType":0,"content":"外快","money":1000,"exactTime":"2018-11-14"},{"userId":2,"des":"餐饮","name":"日常记账本","moneyType":0,"content":"外快3","money":1000,"exactTime":"2018-11-14"}]},{"allIn":1224.4,"allOut":2222.7,"userBookkeepingBeans":[{"userId":2,"des":"旅游","name":"日常记账本","moneyType":1,"content":"人情红包","money":1000,"exactTime":"2018-11-28"},{"userId":2,"des":"餐饮","name":"日常记账本","moneyType":0,"content":"外快1","money":1224.4,"exactTime":"2018-11-28"},{"userId":2,"des":"餐饮","name":"日常记账本","moneyType":1,"content":"支出2","money":1222.7,"exactTime":"2018-11-28"}]}]
+     * dayData : [{"allIn":2000,"allOut":0,"userBookkeepingBeans":[{"id":2,"des":"餐饮","name":"日常记账本","moneyType":0,"content":"外快","money":1000,"exactTime":"2018-11-14"},{"id":2,"des":"餐饮","name":"日常记账本","moneyType":0,"content":"外快3","money":1000,"exactTime":"2018-11-14"}]},{"allIn":1224.4,"allOut":2222.7,"userBookkeepingBeans":[{"id":2,"des":"旅游","name":"日常记账本","moneyType":1,"content":"人情红包","money":1000,"exactTime":"2018-11-28"},{"id":2,"des":"餐饮","name":"日常记账本","moneyType":0,"content":"外快1","money":1224.4,"exactTime":"2018-11-28"},{"id":2,"des":"餐饮","name":"日常记账本","moneyType":1,"content":"支出2","money":1222.7,"exactTime":"2018-11-28"}]}]
      * allMonthIn : 3224.4
      */
 
@@ -52,7 +52,7 @@ public class BookkeepingAllBean {
         /**
          * allIn : 2000.0
          * allOut : 0.0
-         * userBookkeepingBeans : [{"userId":2,"name":"日常记账本","moneyType":0,"content":"外快","money":1000,"exactTime":"2018-11-14"},{"userId":2,"des":"餐饮","name":"日常记账本","moneyType":0,"content":"外快3","money":1000,"exactTime":"2018-11-14"}]
+         * userBookkeepingBeans : [{"id":2,"name":"日常记账本","moneyType":0,"content":"外快","money":1000,"exactTime":"2018-11-14"},{"id":2,"des":"餐饮","name":"日常记账本","moneyType":0,"content":"外快3","money":1000,"exactTime":"2018-11-14"}]
          */
 
         private double allIn;
@@ -102,7 +102,7 @@ public class BookkeepingAllBean {
 
         public static class UserBookkeepingBeansBean {
             /**
-             * userId : 2
+             * Id : 2
              * name : 日常记账本
              * moneyType : 0
              * content : 外快
@@ -110,21 +110,22 @@ public class BookkeepingAllBean {
              * exactTime : 2018-11-14
              */
 
-            private int userId;
+            private int id;
             private String name;
             private int moneyType;
             private String content;
             private double money;
             private String exactTime;
+            private int classificationId;
 
-            public int getUserId()
+            public int getId()
             {
-                return userId;
+                return id;
             }
 
-            public void setUserId(int userId)
+            public void setId(int id)
             {
-                this.userId = userId;
+                this.id = id;
             }
 
             public String getName()
@@ -177,15 +178,24 @@ public class BookkeepingAllBean {
                 this.exactTime = exactTime;
             }
 
+            public int getClassificationId() {
+                return classificationId;
+            }
+
+            public void setClassificationId(int classificationId) {
+                this.classificationId = classificationId;
+            }
+
             @Override
             public String toString()
             {
                 return "UserBookkeepingBeansBean{" +
-                        "userId=" + userId +
+                        "id=" + id +
                         ", name='" + name + '\'' +
                         ", moneyType=" + moneyType +
                         ", content='" + content + '\'' +
                         ", money=" + money +
+                        ", classificationId=" + classificationId +
                         ", exactTime='" + exactTime + '\'' +
                         '}';
             }

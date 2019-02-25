@@ -186,7 +186,9 @@ public class BookkeepingFragment extends ProgressBaseFragment implements Navigat
     @Subscribe
     public void onEvent(BookkeepingEditEvent editEvent) {
         BookkeepingAllBean.DayDataBean.UserBookkeepingBeansBean userBookkeepingBeansBean = editEvent.getUserBookkeepingBeansBean();
+
         if (userBookkeepingBeansBean != null) {
+            // 更新总额
             switch (userBookkeepingBeansBean.getMoneyType()) {
                 // 0 支出
                 case 0:
@@ -219,7 +221,7 @@ public class BookkeepingFragment extends ProgressBaseFragment implements Navigat
                         oldDayDataBean.setAllIn(oldDayDataBean.getAllIn() + userBookkeepingBeansBean.getMoney());
                     }
                     // 添加需要更新的数据到已有的数据中
-                    oldDayDataBean.getUserBookkeepingBeans().add(userBookkeepingBeansBean);
+                    oldDayDataBean.getUserBookkeepingBeans().add(0,userBookkeepingBeansBean);
                     // 更新数据
                     mBookkeepingAdapter.notifyItemChanged(containsPosition);
                 } else {
@@ -240,7 +242,7 @@ public class BookkeepingFragment extends ProgressBaseFragment implements Navigat
                         insertPosition = 0;
                     } else {
                         // 当前记录的日期小于最大的记录时间表示是补录的数据，应该插入到数据中间
-                        for (int i = 0; i < mBookkeepingAdapter.getAll().size(); i++) {
+                        for (int i = 1; i < mBookkeepingAdapter.getAll().size(); i++) {
                             String exactTimes = mBookkeepingAdapter.getAll().get(i).getExactTimes();
                             int indexOf = exactTimes.lastIndexOf("-");
                             String str = exactTimes.substring(indexOf + 1);
@@ -269,7 +271,6 @@ public class BookkeepingFragment extends ProgressBaseFragment implements Navigat
             } else {
                 // 表示当月没有记账记录
                 mEmptyHintTv.setVisibility(View.GONE);
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
                 List<BookkeepingAllBean.DayDataBean> dayDataBeanList = new ArrayList<>();
                 BookkeepingAllBean.DayDataBean dayDataBean = new BookkeepingAllBean.DayDataBean();
@@ -283,8 +284,14 @@ public class BookkeepingFragment extends ProgressBaseFragment implements Navigat
                 dayDataBean.setExactTimes(userBookkeepingBeansBean.getExactTime());
 
                 List<BookkeepingAllBean.DayDataBean.UserBookkeepingBeansBean> userBookkeepingBeansBeanList = new ArrayList<>();
+
                 userBookkeepingBeansBeanList.add(userBookkeepingBeansBean);
+
                 dayDataBean.setUserBookkeepingBeans(userBookkeepingBeansBeanList);
+
+                dayDataBeanList.add(dayDataBean);
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 mBookkeepingAdapter = new BookkeepingAdapter(getActivity(), dayDataBeanList);
                 mRecyclerView.setAdapter(mBookkeepingAdapter);
             }

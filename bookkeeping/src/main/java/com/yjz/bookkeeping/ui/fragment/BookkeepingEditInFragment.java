@@ -1,11 +1,13 @@
 package com.yjz.bookkeeping.ui.fragment;
 
-import android.content.Intent;
+import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import com.seabig.common.base.BaseRecyclerAdapter;
 import com.seabig.common.base.DelayLoadFragment;
 import com.seabig.common.datamgr.AppConstant;
+import com.seabig.common.util.DateUtils;
 import com.seabig.common.util.LogUtils;
 import com.seabig.common.util.MoneyTextWatcher;
 import com.seabig.common.util.ResourceUtils;
@@ -43,7 +46,7 @@ import java.util.Locale;
  * des: 账目编辑页
  */
 
-public class BookkeepingEditInFragment extends DelayLoadFragment implements BookkeepingCommitContract.View {
+public class BookkeepingEditInFragment extends DelayLoadFragment implements BookkeepingCommitContract.View, View.OnClickListener {
 
     private RecyclerView mRecyclerView;
     private TextView mTypeNameTv;
@@ -53,6 +56,7 @@ public class BookkeepingEditInFragment extends DelayLoadFragment implements Book
     private EditText mNoteEdt;
     private TextView mTimeTv;
     private BookkeepingCommitPresenter commitPresenter;
+    private DatePickerDialog datePickerDialog;
 
     @Override
     protected int onSettingUpContentViewResourceID() {
@@ -67,6 +71,7 @@ public class BookkeepingEditInFragment extends DelayLoadFragment implements Book
         mNoteEdt = findViewById(R.id.edt_note);
         mRecyclerView = findViewById(R.id.recycler_view);
         mTimeTv = findViewById(R.id.time);
+        mTimeTv.setOnClickListener(this);
         //默认两位小数
         mMoneyEdt.addTextChangedListener(new MoneyTextWatcher(mMoneyEdt));
     }
@@ -153,10 +158,67 @@ public class BookkeepingEditInFragment extends DelayLoadFragment implements Book
             userBookkeepingBeansBean.setContent(bookkeepingBean.getContent());
             userBookkeepingBeansBean.setExactTime(bookkeepingBean.getExactAddTime());
             userBookkeepingBeansBean.setMoneyType(1);
+            userBookkeepingBeansBean.setClassificationId(18 + clickPosition + 1);
             userBookkeepingBeansBean.setName("日常记账本");
             EventBus.getDefault().post(new BookkeepingEditEvent(userBookkeepingBeansBean));
             commitPresenter = null;
             (getActivity()).finish();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        //获取当前月最后一天
+        if (i == R.id.time) {
+            showDatePickerDialog(getActivity());
+        }
+    }
+
+    /**
+     * 显示时间日历
+     * @param activity 当前界面
+     */
+    public void showDatePickerDialog(Activity activity) {
+        Calendar calendar = Calendar.getInstance();
+        // 直接创建一个DatePickerDialog对话框实例，并将它显示出来
+        // 绑定监听器(How the parent is notified that the date is set.)
+        datePickerDialog = new DatePickerDialog(activity,
+                // 绑定监听器(How the parent is notified that the date is set.)
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        mTimeTv.setText(String.format(Locale.CHINA, "%s月%s日", monthOfYear, dayOfMonth));
+                    }
+                }
+                // 设置初始日期
+                , calendar.get(Calendar.YEAR)
+                , calendar.get(Calendar.MONTH)
+                , calendar.get(Calendar.DAY_OF_MONTH));
+
+        DatePicker datePicker = datePickerDialog.getDatePicker();
+
+        // 当前月的第一天
+        Calendar minCal = Calendar.getInstance();
+        minCal.add(Calendar.MONTH, 0);
+        //设置为1号,当前日期既为本月第一天
+        minCal.set(Calendar.DAY_OF_MONTH,1);
+
+        // 当前月的最后一天
+        Calendar maxCal = Calendar.getInstance();
+        maxCal.set(Calendar.DAY_OF_MONTH, maxCal.getActualMaximum(Calendar.DAY_OF_MONTH));
+        // 设置时间范围
+        datePicker.setMinDate(minCal.getTimeInMillis());
+        datePicker.setMaxDate(maxCal.getTimeInMillis());
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (datePickerDialog != null){
+            datePickerDialog.dismiss();
         }
     }
 }

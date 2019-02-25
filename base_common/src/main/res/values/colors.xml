@@ -26,4 +26,6 @@
     <color name="transparent">#00000000</color>
     <!-- 页面颜色 -->
     <color name="page_bg">#f5f4f5</color>
+
+    <color name="main_line_color">#e6e6e6</color>
 </resources>

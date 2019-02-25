@@ -360,4 +360,27 @@ public class DateUtils {
         }
         return week;
     }
+
+    /**
+     * 获取月中的第一天
+     * @return 第一天
+     */
+    public static int getFirstDayOfMonth() {
+        Calendar a = Calendar.getInstance();
+        a.set(Calendar.DAY_OF_MONTH, 1);
+        return a.get(Calendar.DAY_OF_WEEK);
+    }
+
+    /**
+     * 获取当前月的最后一天
+     *
+     * @return int
+     */
+    public static int getCurrentMonthLastDay() {
+        Calendar a = Calendar.getInstance();
+        a.set(Calendar.DATE, 1);//把日期设置为当月第一天
+        a.roll(Calendar.DATE, -1);//日期回滚一天，也就是最后一天
+        int maxDate = a.get(Calendar.DATE);
+        return maxDate;
+    }
 }
